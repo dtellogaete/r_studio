@@ -4,9 +4,9 @@ author: "Daniel"
 date: "21-09-2019"
 output:
   pdf_document: default
+  word_document: default
   html_document:
     df_print: paged
-  word_document: default
 ---
 
 ```{r setup, include=FALSE}
