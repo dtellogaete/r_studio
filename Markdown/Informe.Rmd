@@ -1,0 +1,79 @@
+---
+title: "Informe"
+author: "Solver Austral SpA"
+date: "26-09-2019"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+# Informe
+
+# Titulo 1
+
+## Titulo 2
+
+### Titulo 3
+
+#### Titulo 4
+
+##### Titulo 5
+
+###### Titulo 6
+
+Este es un texto normal, tan normal como el día de hoy.
+Tambien se puede escribir en \LaTeX.
+
+Para escribir en *cursiva*: se puede con los asteriscos *hola mundo* o con guion bajo _hola mundo_
+
+Para escribir en **negrita** se puede con doble asterisco **hola mundo** o con doble guión bajo __hola mundo__
+
+Los sombreros van con ^ por ejemplo 2^3^
+
+Para tachar una palabra se usa doble tilde ~~esta tachado~~
+
+Puedes visitar mi perfil de linkedin [Daniel Tello](https://www.linkedin.com/in/danieltellog/)
+
+-- Hola mundo
+--- chao mundo
+elipsis: ...
+
+ecuaciones en linea $S= \pi\cdot r^2$.
+
+### Logo de Solver
+
+
+![](C:\Users\Daniel\Documents\R\r_studio\Image\Logo-Solver-1.png)
+
+***
+
+Aqui empezamos otra cosa 
+
+* Item primero
+* Item segundo
+  + Sub item 2.1
+  + Sub item 2.2
+* Item tercero
+
+### Lista ordenada
+
+1. Primero
+2. Segundo
+  +subitem
+  +item 
+3. Tercero
+4. Cuarto
+
+Empresa             | Clientes         |Ventas
+--------------------|------------------|---------------------
+Solver Austral SpA  |20                |$200 MM USD
+Distribuidora Malu  |100               |$1000 MM USD
+
+
+
+
+
+
+
+

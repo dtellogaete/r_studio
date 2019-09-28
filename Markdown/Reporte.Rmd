@@ -1,15 +1,18 @@
 ---
-title: "Informe"
-author: "Solver Austral SpA"
-date: "21-09-2019"
+title: 
+author: 
+date: 
 output:
-  html_document:
-    df_print: paged
-  word_document: default
+  html_document: default
   pdf_document: default
 ---
 
+# REPORTE SOLVER
 
+## Logo de Solver
+
+
+![](C:\Users\Daniel\Documents\R\r_studio\Image\Logo-Solver-1.png)
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -33,8 +36,4 @@ You can also embed plots, for example:
 plot(pressure)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. 
-
-\begin{equation*}
-ax+by+c=0\theta
-\end{equation*}
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
