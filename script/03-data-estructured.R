@@ -79,9 +79,57 @@ pi*x
 #[9] 28.274334 31.415927
 
 
+#sapply aplica una funcióna todos los elementos del vector
 sapply(x, FUN = function(elemento){sqrt(elemento)})
 
+cd = function(x){ summary(lm((1:4)~c(1:3,x)))$r.squared}
+cd(6)
 
+sapply(x, FUN= cd)
 
+#suma de vectores
+(1:10)+(1:10)
 
+#multiplicacion de vectores
+(1:10)*(1:10)
+
+#vector elevado a otro vector
+(1:10)^(1:10)
+
+#sucesion
+n= (1:100)
+
+x= 2*3^(n/2)
 x
+
+2*3^((1:100)/2)
+
+cuadrado = function(x){x^2}
+
+v= c(1:6)
+
+mean(v)
+cumsum(v)
+
+v= c(3,6,2,5,1,9)
+sort(v)
+rev(v)
+
+#Ejercicio
+#Combinar las funciones sort y rev para crear un vector que sea ordenado en orden decreciente
+x= c(1,3,4,5,6,79,9,9,10,25)
+rev(sort(x))
+
+x=1:10
+length(x)
+max(x)
+min(x)
+sum(x)
+prod(x)
+cumsum(x)
+cummin(x)
+cumprod(x)
+diff(x)
+
+sort(x, decreasing = TRUE)
+

@@ -1,0 +1,192 @@
+---
+title: "Matrices"
+output: html_notebook
+---
+
+## Definiendo matrices
+
+* **matrix(vector, nrow = n, byrow = valor_logico)**: para definir una matrix de n filas
+  + **nrow:** número de filas
+  + **byrow**: *TRUE*: la matriz se construye por filas; *FALSE*(valor por defecto) se construye por columnas.
+  + **ncol**: número de columnas (puede usarse en lugar de nrow)
+  + [i,j] = i filas, j columnas.
+  + Todas las entradas de una matriz han de ser del mismo tipo de dato.
+  
+```{r}
+M = matrix(1:12, nrow=4)
+M
+```
+```{r}
+M = matriz(1:12, nrow = 4, byrow =T)
+M
+```
+
+```{r}
+M = matrix(1:12, nrow=3)
+M
+```
+
+El total de datos no es simetrico con **nrow** por lo tanto vuelve a repetir los datos faltantes.
+
+```{r}
+M = matrix(1:12, nrow = 5)
+M
+```
+
+Matriz de 1
+```{r}
+matrix(1, nrow= 4, ncol= 6)
+```
+
+#### Ejercicio
+* Como definir una matriz constante
+```{r}
+matrix(0, nrow = 3, ncol = 5)
+```
+
+* Con el vector vec= (1,2,3,4,5,6,7,8,9,10,11,12) crea la matriz
+
+```{r}
+vec = c(1:12)
+vec
+```
+
+```{r}
+Matrix = matrix(vec, nrow= 3)
+Matrix
+```
+
+## Cómo construir matrices
+
+* **rbind(vector1, vector2,...)**: construye la matriz de filas vector1, vector2
+* **cbind(vector1, vector2,...)**: construye la matriz de columnas vector1, vector2
+  + Los vectores tienen que tener la misma longitud
+  + Sirve para añadir columnas (filas) a una matriz o concatenar (filas) matrices con el mismo número de filas (columnas)
+  
+* **diag(vector)**:para construir una matriz diagonal con un vector dado.
+  + **diag(n)**: produce matriz identidad de orden n
+
+
+Añade filas que hemos especificado  
+```{r}
+rbind(M, c(1,2,3), c(-1,-2,-3))
+```  
+
+Puede crear una matriz de dos filas
+```{r}
+rbind(c(1,2,3), c(-1,-2,-3))
+```
+
+Crea una matriz de dos columnas  
+```{r}
+cbind(c(1,2,3), c(-1,-2,-3))
+```
+
+Matriz diagonal
+```{r}
+diag(c(1,2,3,4))
+```
+
+```{r}
+diag(5, nrow=3)
+```
+
+## Submatrices
+
+* **matriz[i,j]**: indica la entrada i,j
+* **matriz[i,]**: indica la fila i 
+* **matriz[,j]**: indica la columna
+
+
+```{r}
+M
+```
+
+```{r}
+M[2,3]
+```
+
+```{r}
+M[2,]
+```
+
+```{r}
+M[,3]
+```
+
+Matriz con la fila 2, 3 y 4 y columnas 1 y 2
+
+```{r}
+M[c(2,3,4), 1:2]
+```
+
+### Funciones de matrices
+
+* **diag(matriz)**: para obtener la diagonal de la matriz
+* **nrow(matriz)**: nos devuelve el número de filas de la matriz
+* **ncol(matriz)**: devuelve el núm de columnas de la matriz
+* **dim(matriz)**: devuelve dimensiones de la matriz
+* **sum(matriz)**: suma todas las entradas de la matriz
+* **prod(matriz)**: obtenemos el producto de todas las entradas de la matriz
+* **mean(matriz)**: obtemos la media aritmética de todas las entradas de la matriz
+* **colSums(matriz)**: obtenemos las sumas por columnas de la matriz
+* **rowSums(matriz)**: obtenemos las sumas por filas de la matriz
+* **colMeans(matriz)**: obtenemos las medias aritméticas por columna de la matriz
+* **rowMeans(matriz)**: obtenemos las medias aritméticas por filas de la matriz
+
+```{r}
+M
+```
+
+diagonal
+```{r}
+diag(M)
+```
+
+```{r}
+nrow(M)
+```
+```{r}
+ncol(M)
+```
+
+```{r}
+dim(M)
+```
+
+```{r}
+sum(M)
+```
+
+
+```{r}
+prod(M)
+```
+
+```{r}
+mean(M)
+```
+
+Suma de las columnas
+```{r}
+colSums(M)
+```
+
+```{r}
+rowMeans(M)
+```
+
+**Funcion apply**
+* 1: la aplica por filas
+* 2: la aplica por columnas
+* c(1,2): actua tanto en filas como columnas
+
+Resume todo el vector de filas
+```{r}
+apply(M, MARGIN = 1, FUN = function(x){sqrt(sum((x^2)))})
+```
+
+```{r}
+apply(M, MARGIN = c(1,2), FUN = function(x){x^2})
+```
+

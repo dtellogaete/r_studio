@@ -1,0 +1,30 @@
+---
+title: "Binomio de Newton"
+author: "Daniel"
+date: "28-09-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Producto notable 
+
+La formula del producto notable es
+
+$$(a+b)^2 = a^2+2ab+b^2$$
+
+## Función en R
+
+```{r}
+binomioNewton2 = function(a,b){
+  a^2+2*a*b+b^2
+}
+
+binomioNewton2(1,2)
+binomioNewton2(2,1)
+```
+
+
+

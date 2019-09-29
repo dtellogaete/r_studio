@@ -13,7 +13,7 @@ con <- dbConnect(RPostgres::Postgres(),dbname = 'defaultdb',
                  host = 'db-postgresql-nyc1-49189-do-user-6504988-0.db.ondigitalocean.com',
                  port = 25060, # or any other port specified by your DBA
                  user = 'doadmin',
-                 password = 'uloudpjwigbbnx12')
+                 password = '*************')
 
 dbListTables(con)
 

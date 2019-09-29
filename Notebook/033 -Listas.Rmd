@@ -1,0 +1,73 @@
+---
+title: "Listas"
+output: html_notebook
+---
+
+## Listas
+
+El vector de vectores no existe.
+**List** Lista formada por diferentes objetos, no necesariamente del mismo tipo, cada cual con un nombre interno.
+
+* **list**: función que crea una list
+  + Para obtener un compononte concreto se usa **list$componente**
+  + Podemos indicar el objeto por su posición usando dobles corchetes: **list[[i]]**. Lo que obtendremos es una list formada por esa única componente, no el objeto que forma el componente
+
+
+Crear lista  
+```{r}
+x = c(1,5,-2,6,-7,8,-3,4,-9)
+x
+```
+```{r}
+L = list(nombre = "temperaturas", datos = x, media = mean(x), sumas = cumsum(x))
+L
+```
+
+Para obtener un componente de la lista
+
+```{r}
+L$nombre
+```
+```{r}
+L$datos
+```
+```{r}
+L[[2]]
+```
+```{r}
+L[2]
+```
+
+Multilplicando valores de la lista
+```{r}
+3*L[[2]]
+```
+
+### Obtener información de una lista
+
+* **str(list)**: para conocer la estructura interna de una list.
+* **name(list)**: para saber los nombres de la list.
+
+```{r}
+names(L)
+```
+```{r}
+str(L)
+```
+
+Utilidad de la lista
+
+```{r}
+summary(lm(c(1,2,3,4)~c(1,2,3,6)))
+```
+```{r}
+reg <- lm(c(1,2,3,4)~c(1,2,3,6))
+reg$coefficients
+```
+
+Modelo lineal: *?lm*
+
+```{r}
+?lm
+```
+

@@ -1,0 +1,138 @@
+---
+title: "Valores NA"
+output:
+  html_document:
+    df_print: paged
+---
+
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Los Valores NA
+
+Los comparadores se pueden utilizar para saber si algo es verdad o no
+
+```{r}
+2^pi > pi^2
+```
+```{r}
+2^pi
+```
+```{r}
+pi^2
+```
+
+## Modificar datos de un vector
+```{r}
+x = 1:10
+```
+```{r}
+x[3]
+```
+```{r}
+x[3]=32
+```
+```{r}
+x
+```
+
+Como tiene 10 numeros el 11 añade un numero adicional
+```{r}
+x[11]
+```
+```{r}
+x[11]=15
+
+x
+```
+
+Sumar valores
+```{r}
+x[2:5] = x[2:5]+3
+x
+```
+Rellenar valores con 0
+```{r}
+x[(length(x)-2):length(x)]=0
+x
+```
+Añadir unidades, en las posiciones que no existe añade valores NA
+```{r}
+x[length(x)+5]=9
+x
+```
+
+Una funcion aplicada a un vector NA, va a dar valores NA
+```{r}
+sum(x)
+```
+```{r}
+mean(x)
+```
+
+Extrae los valores NA
+```{r}
+sum(x, na.rm = TRUE)
+```
+
+```{r}
+which(x == NA)
+```
+
+Devuelve los indices cuyos valores son NA
+```{r}
+is.na(x)
+```
+
+Que valores son NA en un vector
+```{r}
+which(is.na(x))
+```
+
+Cambiar los valores de NA por la media (tecnica basica en estadística)
+
+```{r}
+y=x
+y[is.na(y)]= mean(y, na.rm = TRUE)
+y
+```
+
+Saber cuales numeros no son NA
+```{r}
+x[which(!is.na(x))]
+```
+
+Operaciones con los que no son NA
+```{r}
+sum(x[!is.na(x)])
+```
+
+
+Funcion *cumsum* sin valores NA
+```{r}
+cumsum(x[!is.na(x)])
+```
+
+Omitir los valores NA
+
+```{r}
+na.omit(x)
+```
+```{r}
+cumsum(na.omit(x))
+
+```
+
+Limpiar de na
+```{r}
+x_clean = na.omit(x)
+x_clean
+```
+```{r}
+attr(x_clean,"class")  = NULL
+x_clean
+```

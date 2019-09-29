@@ -1,0 +1,113 @@
+---
+title: "FACTORES"
+output: html_notebook
+---
+
+# **FACTORES**
+
+Es como un vector, pero con un estructur más rica que permite usarlo para clasificar observaciones.
+
+* **Levels**: atributo de factor, cada elemento del factor es igual al nivel. Los niveles clasifican las entradas del factor. Se ordenan por orden alfabético.
+
+* Para definir un factor, primero hemos de definir un vector y transformarlo por medio de una de las funciones **factor()** o **as.factor()**
+
+
+Definir un vector de nombres
+```{r}
+nombres = c("Juan", "Antonio", "Ricardo", "Juan", "Juan", "Maria", "Maria")
+nombres
+```
+
+```{r}
+nombres.factor = factor(nombres)
+nombres.factor
+```
+Con factor se pueden quitar los caracteres
+*Levels sirve como etiqueta*
+**as.factor** convierte en factor al vector
+
+### **función factor**
+* **factor(vector, levels=... ):** define un factor a partir de un vector y dispone de algunos parametros que permiten modificar el factor que se crea:
+  + **levels**: permite especificar los niveles e incluso añadir niveles que no aparecen en el vector
+  + **labels**: permite cambiar nombre de los levels
+  
+* **levels(factor)**: obtiene los niveles del factor
+
+```{r}
+gender = c("M", "H", "H", "M", "M", "M", "M", "H", "H")
+gender.fact = factor(gender)
+gender.fact
+```
+Conviernte gender en factor
+
+```{r}
+gender.fact2 = as.factor(gender)
+gender.fact2
+```
+
+```{r}
+gender.fact3 = factor(gender, levels = c("M", "H", "B"))
+gender.fact3
+```
+
+```{r}
+gender.fact4 = factor(gender, levels = c("M", "H", "B"), labels = c("Mujer", "Hombre", "Hermafrodita"))
+gender.fact4
+```
+
+Levels
+```{r}
+levels(gender.fact)
+```
+
+Levels de gender.fact4
+```{r}
+levels(gender.fact4)
+```
+
+Cambiar nombre de levels
+```{r}
+levels(gender.fact4) = c("Femenino", "Masculino", "Híbrido")
+gender.fact4
+```
+
+Vector notas
+```{r}
+notas = c(1,4,3,2,3,2,4,3,1,2,3,4,2,3)
+notas
+```
+
+```{r}
+notas.factor = factor(notas)
+notas.factor
+```
+```{r}
+levels(notas.factor)
+```
+
+cambiando el nombre de las notas
+```{r}
+levels(notas.factor) = c("Suspendido", "Suficiente", "Notable", "Excelente")
+notas.factor
+```
+
+cambiando de cuatro a dos niveles
+
+```{r}
+notas
+```
+
+```{r}
+levels(notas.factor) = c("Suspendido", "Aprobado", "Aprobado", "Aprobado")
+notas.factor
+```
+
+**Factor ordenado**
+Es un factor donde los nivels siguen un orden
+
+* **ordered(vector, levels=...)**: función que define un factor ordenado y tiene los mismos parametros.
+
+```{r}
+ordered(notas, labels =c("Sus", "Suf", "Not", "Exc"))
+```
+
