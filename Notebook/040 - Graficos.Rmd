@@ -53,3 +53,4 @@ plot(fib, xlab= "n", ylab= expression(F[n]),
         main= "Sucesión de Fibonacci", pch= 20, cex= 4, col="mediumblue", bg= "maroon2", log = "y")
 par(mfrow=c(1,1))
 ```
+
