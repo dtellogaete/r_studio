@@ -1,0 +1,55 @@
+---
+title: "Graficos"
+author: "Curso"
+output: html_notebook
+---
+## Gráficos con la función `plot`
+
+### Gráfico básico de puntos
+
+* **plot(x,y)**: para dibujar un gráfico básico de puntos, siendo x, y vectores numéricos.
+  + **plot(x) = plot(1:length(x),x)**
+* **plot(x, funcion)**: para dibujar un gráfico de la función.
+
+```{r primer_plot, fig.cap= "Grafica", fig.align= 'center'}
+alumnos = c(1:10)
+notas = c(2,5,7,9,8,3,5,6,10,7)
+plot(alumnos, notas)
+```
+
+Si no incorporamos `y`, `R` nos va a tomar el parametro `x` como si fuese el vector de datos `y`
+
+```{r}
+plot(2^(1:6))
+
+```
+
+Si queremos representar una función $f(x)$:
+
+```{r}
+f <- function(x){ sqrt(x)}
+plot(f)
+```
+
+### Parámetros de la función plot()
+
+* **log**: para indicar que queremos el gráfico a escala logarítmica
+* **main("título")**: para poner título al gráfico. Si en vez de un texto se desea poner una función matemática utilizar la función **expresion**.
+* **xlab("etiqueta")**: para poner la etiqueta al eje *X*
+* **ylab("etiqueta")**: para poner la etiqueta al eje *Y*
+* **pch=n**: para elegir el símbolo de los puntos. n= 0,1,...,25. El valor por defecto es **pch = 1**
+* **cex**: para elegir tamaño de símbolos
+* **col = "color"**: para elegir el color de los símbolos. [Colores en R](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+
+
+```{r, echo = FALSE, fig.align='center'}
+n = 1:20
+fib = (1/sqrt(5))*((1+sqrt(5))/2)^n-(1/sqrt(5))*((1-sqrt(5))/2)^n
+par(mfrow = c(1,2))
+plot(fib, xlab= "n", ylab= expression(F[n]),
+        main= "Sucesión de Fibonacci", pch= 20, cex= 4, col="mediumblue", bg= "maroon2", log = "x")
+
+plot(fib, xlab= "n", ylab= expression(F[n]),
+        main= "Sucesión de Fibonacci", pch= 20, cex= 4, col="mediumblue", bg= "maroon2", log = "y")
+par(mfrow=c(1,1))
+```

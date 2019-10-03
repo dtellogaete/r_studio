@@ -1,10 +1,12 @@
 ---
 title: "BK's Dashboard"
-output: pdf
-  
-
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    social: [ "twitter", "facebook", "menu"]
+    source_code: embed
 ---
-
 ```{r setup, include=FALSE}
 library(flexdashboard)
 library(knitr)
