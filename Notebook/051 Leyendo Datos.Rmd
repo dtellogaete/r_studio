@@ -1,0 +1,57 @@
+---
+title: "Carga de DF"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Leyendo tablas de datos
+
+* **read.table()**: para definir un data frame a partir de una tabla de datos contenida en un fichero.
++ Este fichero puede estar guardado en nuestro pc o podemos conocer su url.
++ [Lista de dataset](https://maitra.public.iastate.edu/stat501/datasets.html) 
+
+# Carga de ficheros local
+
+## Parámetros de read.table()
+* **header = TRUE**: indicar si la tabla que importamos tiene una primera fila con los nombres de las columnas. El valor por defectos es FALSE.
+* **col.names = c(..)**: para especificar el nombre de las columnas.
+* **sep**: para especificar separaciones entre columnas en el fichero. Si es así hay que introducir el parámetro pertinente entre comillas.
+* **dec**: para especificar el signo que separa la parte entera de la decimal 
+
+Breed (1/5/8)
+Sale Price
+Yearling height at shoulder (in.)
+Fat Free Body (lbs.), 
+Percent Fat-free body, 
+Frame -- scale from 1 (small) to 8 (large), 
+Back fat (in.), 
+sale height at shoulder (in.)
+sale weight (lbs.) of three breeds of bulls,
+
+```{r}
+df = read.table("../../data/bulls.dat", 
+                header = FALSE, 
+                col.names = c("breed","sale_price", "shoulder",
+                              "fat_free", "percent_ff", "frame_scale", 
+                              "back_fat", "sale_height", "sale_weight"),
+                sep= "", dec = ".")
+head(df)
+```
+
+# Carga desde URL
+
+```{r}
+df2 = read.table("https://maitra.public.iastate.edu/stat501/datasets/bulls.dat", 
+                header = FALSE, 
+                col.names = c("breed","sale_price", "shoulder",
+                              "fat_free", "percent_ff", "frame_scale", 
+                              "back_fat", "sale_height", "sale_weight"),
+                sep= "", dec = ".")
+head(df2)
+```
+
+```{r}
+str(df2)
+```
+

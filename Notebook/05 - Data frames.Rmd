@@ -1,0 +1,98 @@
+---
+title: "Data Frame"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+## Data frames:
+
+* **Data frames**: Tabla de doble entrada, formadas por variables en columnas y observaciones en filas.
++ **data()**: para abrir una ventana con la lista de los objetos de datos a los que tenemos acceso en la sesión actual de R.
++ Si entramos a *data(package=.pachages(all.available = TRUE))* obtendremos la lista de todos los objetos de datos a los que tenemos acceso.
+
+### Data Frame de Iris
+
+```{r}
+df = iris
+head(df, 5)
+tail(df, 5)
+```
+
+### Obteniendo información de un dataframe
+
+* **head(df,n)** para mostrar las primeras n filas. Por defecto muestra 6
+* **tail(df,n)** para mostrar las últimos n filas. Por defecto muestra 6
+* **str(df)** muestra estructura global de un dataframe
+* **names(df)** para producir un vector con los nombres de las columnas.
+
+```{r}
+str(df)
+```
+
+```{r}
+names(df)
+```
+
+#### Dataset Orange
+
+```{r}
+str(Orange)
+```
+
+```{r}
+head(Orange, 5)
+```
+
+```{r}
+tail(Orange, 5)
+```
+
+### Obteniendo información de dataframe
+
+* **rownames(df)**: produce un vector con identificadores de las filas.
+* **colnames(df)**: produce un vector con identidicadores de las colummnas
+* **dimnames(df)**: produce una list formada por dos vectores (el de los identificadores de las filas y de los nombres de las columnas)
+* **nrow(df)**: número de filas de un data frame
+* **ncol(df)**: para consultar el número de columnas de un data frame
+* **dim(df)**: para producir un vector con el número de filas y columnas.
+* **df$nombre_variable**: para obtenet una colummna concreta de un dataframe.
+  + El resultaldo será un vector o factor, según como esté definida la columna dentro del data frame.
+  + Las variables de un dataframe son internas, no están definidas en el entorno global de trabajo de R.
+  
+```{r}
+rownames(df)
+colnames(df) # equivalente a names 
+dimnames(df)
+nrow(df)
+ncol(df)
+dim(df)
+df$Species[1:10] 
+df$Petal.Length[1:10] # Es un factor
+```
+
+##### Sub Data Frame
+df[n,m]: Estraer trozos de dataframe por filas y columnas, donde n y m pueden definirse como:
++ intervalos
++ condiciones
++ números naturales
++ no poner nada
++ si solo queremos definir la subtabla quedandonos con algunas variables basta aplicar el nombre del data frame al vector de variables.
++ Estas construcciones se pueden usar tambien para reordenar las filas o columnas.
+
+```{r}
+df[1:10,]
+df[1:10, 2:4]
+df[df$Species == "setosa" & df$Sepal.Width >4, ]
+df[df$Species == "setosa" & df$Sepal.Width >4, ][c(1,3), c(2,5)]
+```
+
+
+
+
+
+
+
+
+
