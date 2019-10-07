@@ -1,0 +1,70 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Aplicando funciones a data frames
+
+* **sapply(df, función)**: para aplicar una función a todas las columnas de un data frame en un solo paso.
++ **na.rm = TRUE**: para evitar que el valor que devuelva la función para las columnas que contengan algun NA sea NA.
+* **aggregate(variables~factors, data =df, FUN = función)**: para aplicar una función a variables de un data frame clasificadas por los niveles de un, o más de un factor.
++ Si queremos aplicar la función a más de una variable, tenemos que agruparlas con un **cbind**
++ Si queremos separar las variables mediante más de un factor, tenemos que agruparlos como signos +.
+
+# Funcion `saply`
+
+```{r}
+str(iris)
+sapply(subset(iris, select = 1:4), mean)
+sapply(iris[, 1:4], sum)
+f = function(x){sqrt(sum(x^2))}
+sapply(iris[, 1:4], f)
+```
+
+```{r}
+df = data.frame(C1 = c(1,2,NA,4), C2 = c(5,NA,2,3))
+sapply(df, mean)
+sapply(df, mean, na.rm = TRUE)
+
+```
+
+```{r}
+aggregate(cbind(Sepal.Length, Petal.Length) ~ Species , data = iris, FUN = mean, na.rm = TRUE)
+```
+
+```{r}
+head(mtcars)
+str(mtcars)
+mtcars$cyl = as.factor(mtcars$cyl)
+mtcars$gear = as.factor(mtcars$gear)
+mtcars$carb = as.factor(mtcars$carb)
+str(mtcars)
+
+aggregate(mpg~cyl+gear+carb, data = mtcars, FUN = mean, na.rm = TRUE) 
+```
+
+# Variables globales
+* **attach(df)**: para hacer que R entienda sus variables como globales y que las podamos usar por su nombre, sin necesidad de añadir delante el nombre del data frame y el símbolo $.
++ Si ya hubiera existido una variable definida con el mismo nombre que una variable del data frame al que aplicamos **attach**, hubieramos obtenido un mensaje de error al ejecutar esta función y no se hubiera reescrito la variable global original.
+
+* **detach(df)**: para devolver la situación original, eliminando del entorno global las variables del data frame.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

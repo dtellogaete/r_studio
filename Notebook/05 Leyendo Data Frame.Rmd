@@ -1,0 +1,198 @@
+---
+title: "Leyendo Data Frame"
+author: "Daniel"
+date: "07-10-2019"
+output:
+  html_document: default
+  word_document: default
+---
+
+# Leyendo tablas de datos
+
+* **read.table()**: para definir un data frame a partir de una tabla de datos contenida en un fichero.
++ Este fichero puede estar guardado en nuestro pc o podemos conocer su url.
++ [Lista de dataset](https://maitra.public.iastate.edu/stat501/datasets.html) 
+
+# Carga de ficheros local
+
+## Parámetros de read.table()
+* **header = TRUE**: indicar si la tabla que importamos tiene una primera fila con los nombres de las columnas. El valor por defectos es FALSE.
+* **col.names = c(..)**: para especificar el nombre de las columnas.
+* **sep**: para especificar separaciones entre columnas en el fichero. Si es así hay que introducir el parámetro pertinente entre comillas.
+* **dec**: para especificar el signo que separa la parte entera de la decimal
+* **stringASFactors**: para prohibir la transformación de las columnas de palabras en factores debemos usar *stringsAsFactors=FALSE* (por defector R realiza la trasnformación)
++ Para importar un fichero de una página web segura (URL comienza con https), no podemos entrar directamente la dirección en *read.table()*; una solución es instalar y cargar el paquete RCurl y entonces usar la instrucción *read.table (textConnection(getURL("url")),...)*
+
+
+Breed (1/5/8)
+Sale Price
+Yearling height at shoulder (in.)
+Fat Free Body (lbs.), 
+Percent Fat-free body, 
+Frame -- scale from 1 (small) to 8 (large), 
+Back fat (in.), 
+sale height at shoulder (in.)
+sale weight (lbs.) of three breeds of bulls,
+
+```{r}
+df = read.table("../data/bulls.dat", 
+                header = FALSE, 
+                col.names = c("breed","sale_price", "shoulder",
+                              "fat_free", "percent_ff", "frame_scale", 
+                              "back_fat", "sale_height", "sale_weight"),
+                sep= "", dec = ".")
+head(df)
+```
+
+# Carga desde URL
+
+```{r}
+df2 = read.table("https://maitra.public.iastate.edu/stat501/datasets/bulls.dat", 
+                header = FALSE, 
+                col.names = c("breed","sale_price", "shoulder",
+                              "fat_free", "percent_ff", "frame_scale", 
+                              "back_fat", "sale_height", "sale_weight"),
+                sep= "", dec = ".")
+head(df2)
+```
+
+```{r}
+str(df2)
+
+```
+
+```{r}
+df3 = read.table("https://maitra.public.iastate.edu/stat501/datasets/olive.dat",
+                 stringsAsFactors = FALSE, header =TRUE)
+str(df3)
+```
+
+# Leyendo datos de diferentes tipos de ficheros
+
+* **read.csv()**: para importar ficheros en formato CSV
+* **read.xls() o read.xlsx()** para importar hojas de cálculo de Excel u OpenOffice en formato XLS o XLSX., respectivamente. Se necesita el paquete xlsx
+* **read.mtb()**: para importar tablas de datos Minitab, se necesita el paquete foreign
+* **read.spss()**: para importar tablas de datos SPSS, se necesita el paquete foreign
+
+# Exportando datos a ficheros
+
+* **write.table(dfm file = "")**: exporta un data frame a un fichero.
++ **file = ""**: es donde indicaresmos el nombre que queremos darle al fichero 
++ Podemos usar el parámetro **sep** para indicar el simbolo de separación de columnas. Siempre entre comillas.
++ También podemos utilizar el parámetro **dec** para indicar la separación entre parte entera y decimal.
+
+```{r}
+write.table(df3, file = "../data/olive.txt", dec = ".")
+df4 = read.table("../data/olive.txt", header = TRUE, dec =".")
+head(df4)
+```
+
+# Construyendo data frames
+
+* **data.frame(vector_1,...,vector_n)**: para construir un data frama a partir de vectores introducidos en el orden que queremos disponer las columnas de la tabla.
++ R considera del mismo tipo de datos todas las entradas de una columna de un data frame.
++ Las variables tomarán nombres de los vectores. Estos nombres se pueden especificar en el argumento de *data.frame* entrando una construccion de la forma *nombre_variable = vector*.
++ **rownames**: para especificar los identificadores de las filas.
++ También en esta función podemos hacer uso del parámetro, *stringAsFactors* para evitar la transformación de las columnas de tipo de palabras en factores.
+
+* **fix(df)**: para crear / editar un data frame con el editor de datos.
+* **names(df)** para cambiar los nombres de las variables.
+* **rownames(df)** para modificar los identificadores de las filas. Han de ser todos diferentes.
+* **dimnames(df) = list(vec_nom_fil, vec_nom_col):** para modificar el nombre de las filas y de las columnas simultaneamente.  
+
+* **df[num_fila,] = c(...)**: para añadir una fila a un data frame.
++ Las filas que añadimos de esta manera son vectores, y por tanto sus entradas han de ser todas del mismo tipo.
++ Si no añadimos las filas inmediatamente siguientes a la última fila del data frame, los valores entre su última fila y las que añadimos quedarán no definidos y apareceran como NA.
++ Para evitar el problema anterior, vale más usar la funcion **rbind()** para concatenar el data frame con la nueva fila.
+
+
+
+```{r}
+gender = c("H", "M", "M", "M", "H")
+age = c(23, 45, 20, 30, 18)
+family = c(2, 3, 4, 2, 5)
+
+df5 = data.frame(genero = gender, edad = age, familia = family, 
+                 stringsAsFactors = TRUE)
+row.names(df5) = c("P1", "P2", "P3", "P4", "P5")
+df5
+str(df5)
+dimnames(df5) = list(
+  c("Antonio", "Ricardo", "JuanGabriel", "María", "Margarita"),
+  c("Sexo", "Años", "MiembrosFamilia")
+)
+
+df5= rbind(df5, c("H", 30, 1))
+df5
+df5$Sexo = as.character(df5$Sexo)  #Convierte factor a caracter
+df5$Ingresos = c(10000, 12000, 15000, 12000, 20000, 10000) #añade una columna a la tabla
+
+
+
+```
+
+# Cambiando los tipos de datos (casting)
+
+* **as.character**: para transformar todos los datos de un objeto varchar
+* **as.integer**: para transformar todos los datos de un objeto a números enteros.
+* **as.numeric**: pata transformar todos los datos a números reales.
+
+```{r}
+as.character(df5$Años)
+as.factor(df5$Años)
+as.numeric(df5$Años)
+```
+
+# Subdata frames
+
+* **droplevels(df)**: para borrar los niveles sobrantes de todos los factores, ya que las columnas que son factores heredan en los sub data frames todos los niveles del factor original, aunque no aparezcan en el trozo que hemos extraido.
+
+* **select(df, parámentros)**: para especificar que queremos extraer de un dataframe
++ **starts_with("x")**: extrae del dataframe las variables cuyo nombre empieza con la palabra "x"
++ **ends_with("x")**: extrae del dataframe las variables cuyo nombre termina con la palabra x
++ **contains("x")**: extrae del dataframe las variables cuyo nombre contiene la palabra "x"
+
++ Se necesita del paquete **dplyr** o mejor aún **tidyverse**
+
+* **subset(df, condicion, select=columnas)**: para extraer un dataframe las filas que cumplen la condición y las columnas especificadas.
++ Si queremos todas las filas, no hay que especificar ninguna condición 
++ Si queremos todas las columnas, no hace falta especificar el parámetro *select*
++ Las variables en las condición se especifican con su nombre, sin añadir antes el nombre del data frame.
+
+```{r}
+gender = c("H", "M", "M", "M", "H")
+age = c(23, 45, 20, 30, 18)
+family = c(2, 3, 4, 2, 5)
+
+df5 = data.frame(genero = gender, edad = age, familia = family, 
+                 stringsAsFactors = TRUE)
+
+df5[df5$genero == "M", ] ->  df_m 
+str(df_m)
+df_m =droplevels(df_m) #Elimina los niveles sobrantes en este caso al "H"
+str(df_m)
+```
+
+# Tydiverse
+
+```{r}
+library(tidyverse)
+iris_petal = select(iris, starts_with("Petal"))
+head(iris_petal)
+iris_length = select(iris, ends_with("Length"))
+head(iris_length)
+```
+
+# Subset
+
+```{r}
+subset(iris, Species == "versicolor", select= c(1,3)) -> versicolor
+rownames(versicolor) = 1:nrow(versicolor) # se hace para que empiece a contar desde 1 y no de 51.
+head(versicolor,5)
+str(versicolor)
+```
+
+
+
+
+
