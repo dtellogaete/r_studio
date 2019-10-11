@@ -4,7 +4,6 @@ output:
   html_document:
     df_print: paged
   html_notebook: default
-  word_document: default
 ---
 
 # Analisis estadistico de datos
@@ -80,4 +79,53 @@ table(datos)
 table(datos)["M"] # solo para saber las mujeres
 sum(table(datos)) #Entrega el total de elementos
 ```
+
+La tabla de de **frecuencias relativas** de un vector se puede calcular aplicando la funcion **prop.table()** a su **table**. El resultado vuelve a ser una tabla de contingencia unidimensional.
+
+**CUIDADO**: La función prop.table() se tiene que aplicar al resultado de table no al vector original. Si aplicamos prop.table() a un vector de palabras o a un factor data error
+
+#### Freuencias relativas
+
+```{r}
+prop.table(table(datos))
+```
+
+```{r}
+100*prop.table(table(datos))
+```
+
+```{r}
+table(datos)/length(datos)
+```
+
+```{r}
+names(table(datos))
+```
+
+```{r}
+names(which(table(datos)==3))
+```
+
+La moda
+```{r}
+names(which(table(datos)==max(table(datos))))
+```
+
+Funcion Moda
+```{r}
+moda <- function(d){
+  names(which(table(d)==max(table(d))))
+}
+m_t = moda(datos)
+```
+
+La moda del tdata frame es `r m_t`
+
+--
+La función **table()** también permite construir tablas de frecuencias conjuntas de dos a o más variables.
+
+
+
+
+
 

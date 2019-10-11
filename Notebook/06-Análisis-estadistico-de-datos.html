@@ -1676,29 +1676,65 @@ summary {
 <p>Hay bolas con etiquetas del 1 al 5, y se van escogiendo 12</p>
 <pre class="r"><code>x = sample((1:5), size = 12, replace = TRUE)
 x</code></pre>
-<pre><code>##  [1] 2 4 2 4 1 3 4 5 1 2 5 2</code></pre>
+<pre><code>##  [1] 2 1 5 2 4 2 4 2 5 1 2 1</code></pre>
 <pre class="r"><code>Respuestas = factor(sample(c(&quot;Si&quot;, &quot;No&quot;), size = 12, replace = TRUE))
 Respuestas</code></pre>
-<pre><code>##  [1] Si Si Si Si No Si Si No Si Si No No
+<pre><code>##  [1] No No Si No No No No Si No Si Si No
 ## Levels: No Si</code></pre>
 </div>
 <div id="tablas-de-contingencia" class="section level4">
 <h4><strong>Tablas de contingencia</strong></h4>
 <pre class="r"><code>table(x)</code></pre>
 <pre><code>## x
-## 1 2 3 4 5 
-## 2 4 1 3 2</code></pre>
+## 1 2 4 5 
+## 3 5 2 2</code></pre>
 <pre class="r"><code>names(table(x)) # Devuelve los niveles que salieron</code></pre>
-<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;4&quot; &quot;5&quot;</code></pre>
 <pre class="r"><code>table(Respuestas)</code></pre>
 <pre><code>## Respuestas
 ## No Si 
-##  4  8</code></pre>
+##  8  4</code></pre>
 <pre class="r"><code>datos = factor(c(&quot;H&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;H&quot;, &quot;H&quot;, &quot;M&quot;, &quot;M&quot;))
 table(datos)</code></pre>
 <pre><code>## datos
 ## H M 
 ## 3 5</code></pre>
+<pre class="r"><code>table(datos)[&quot;M&quot;] # solo para saber las mujeres</code></pre>
+<pre><code>## M 
+## 5</code></pre>
+<pre class="r"><code>sum(table(datos)) #Entrega el total de elementos</code></pre>
+<pre><code>## [1] 8</code></pre>
+<p>La tabla de de <strong>frecuencias relativas</strong> de un vector se puede calcular aplicando la funcion <strong>prop.table()</strong> a su <strong>table</strong>. El resultado vuelve a ser una tabla de contingencia unidimensional.</p>
+<p><strong>CUIDADO</strong>: La función prop.table() se tiene que aplicar al resultado de table no al vector original. Si aplicamos prop.table() a un vector de palabras o a un factor data error</p>
+</div>
+<div id="freuencias-relativas" class="section level4">
+<h4>Freuencias relativas</h4>
+<pre class="r"><code>prop.table(table(datos))</code></pre>
+<pre><code>## datos
+##     H     M 
+## 0.375 0.625</code></pre>
+<pre class="r"><code>100*prop.table(table(datos))</code></pre>
+<pre><code>## datos
+##    H    M 
+## 37.5 62.5</code></pre>
+<pre class="r"><code>table(datos)/length(datos)</code></pre>
+<pre><code>## datos
+##     H     M 
+## 0.375 0.625</code></pre>
+<pre class="r"><code>names(table(datos))</code></pre>
+<pre><code>## [1] &quot;H&quot; &quot;M&quot;</code></pre>
+<pre class="r"><code>names(which(table(datos)==3))</code></pre>
+<pre><code>## [1] &quot;H&quot;</code></pre>
+<p>La moda</p>
+<pre class="r"><code>names(which(table(datos)==max(table(datos))))</code></pre>
+<pre><code>## [1] &quot;M&quot;</code></pre>
+<p>Funcion Moda</p>
+<pre class="r"><code>moda &lt;- function(d){
+  names(which(table(d)==max(table(d))))
+}
+m_t = moda(datos)</code></pre>
+<p>La moda del tdata frame es M</p>
+<p>– La función <strong>table()</strong> también permite construir tablas de frecuencias conjuntas de dos a o más variables.</p>
 </div>
 </div>
 </div>
