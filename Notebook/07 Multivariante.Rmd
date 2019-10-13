@@ -57,3 +57,9 @@ prop.table(table(sex, ans, place), margin = 3) # Frec. Rel Marginal por Lugar
 prop.table(table(sex, ans, place), margin = c(1,2)) #Frec Rel Marginal por Sexo y País
 ```
 
+
+
+```{python}
+print("hola mundo")
+```
+
