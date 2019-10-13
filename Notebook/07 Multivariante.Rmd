@@ -59,7 +59,3 @@ prop.table(table(sex, ans, place), margin = c(1,2)) #Frec Rel Marginal por Sexo 
 
 
 
-```{python}
-print("hola mundo")
-```
-
