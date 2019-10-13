@@ -122,10 +122,46 @@ m_t = moda(datos)
 La moda del tdata frame es `r m_t`
 
 --
+
+### Tabla de frecuencias bidimensionales
 La función **table()** también permite construir tablas de frecuencias conjuntas de dos a o más variables.
 
+#### Frecuencias relativas bidimensionales
+* **Frecuencias relativas globales**: para cada par de niveles, uno de cada variable, la fracción de individuos que pertenecen a ambos niveles respecto del total de la muestra.
+* **Frecuencias relativas marginales**: dentro de cada nivel de una variable y para cada nivel de la otra, la fracción de individuos que pertenecen al segundo nivel respecto del total de la subpoblación definida por el primer nivel.
+
+### Función `CrossTable()`
+La funcion `CrossTable()` del paquete **gmodels** permite producir (especificando el parámetro **prop.chisq= FALSE**) un resumen de la tabla de frecuencias absolutas y las tres tablas de frecuencias relativas de dos variables de un formato adecuado para su visualización.
+
+La leyenda *Cell Contens* explica los contenidos de cada celda de la tabla: la frecuencia absoluta y relativa por filas, la frecuencia relativa por columnas, y la frecuencia relativa global. Esta función dispone de muchos parámetros que permiten modificar el contenido de celdas, y que podéis consultar en **help(CrossTable)**
+
+#### Paquete `gmodels`
 
 
+```{r}
+library("gmodels")
+sex = factor(c("H", "M", "M", "M", "H", "H", "M", "M"))
+ans = factor(c("S", "N", "S", "S", "S", "N", "N", "S"))
+CrossTable(sex, ans, prop.chisq = FALSE)
+
+```
+
+
+#### Suma por filas y columnas 
+
+```{r}
+tt <- table(sex, ans)
+tt
+prop.table(tt) #Fre. Rel Global
+prop.table(tt, margin = 1) #Frec rel Por sexo
+prop.table(tt, margin = 2) #Frec rel por respuesta
+
+colSums(tt)
+rowSums(tt)
+colSums(prop.table(tt))
+rowSums(prop.table(tt))
+
+```
 
 
 

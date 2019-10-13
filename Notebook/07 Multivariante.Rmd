@@ -1,0 +1,59 @@
+---
+title: "07 Multivariante"
+author: "Daniel"
+date: "13-10-2019"
+output: html_document
+---
+
+# Datos multidimensionales
+
+## Ejemplo de tres dimensiones
+
+```{r}
+ans = sample(c("Si", "No"), size = 100, replace = TRUE)
+sex = sample(c("H", "M"), size = 100, replace = TRUE)
+place = sample(c("San Francisco", "Barcelona", "Valencia", "Cobija", 
+                 "Asturias"), size = 100, replace = TRUE)
+
+table(sex, ans, place)
+```
+
+```{r}
+ftable(sex, ans, place)
+```
+```{r}
+ftable(sex, ans, place, col.vars = c("sex", "ans"))
+```
+
+### Filtrar por tablas
+
+```{r}
+table(sex, ans, place)["M", "Si", "San Francisco"]
+
+```
+```{r}
+table(sex, ans, place)[, "Si", "Valencia"]
+```
+```{r}
+table(sex, ans, place)[, "No",]
+```
+```{r}
+table(sex, ans, place)["M",,"Cobija"]
+```
+
+
+### Frecuencias relativas
+
+Relativa Marginal por la combinacion sexo y país.
+
+```{r}
+prop.table(table(sex, ans, place)) #Frec. Rel. Globales
+```
+```{r}
+prop.table(table(sex, ans, place), margin = 3) # Frec. Rel Marginal por Lugar
+```
+
+```{r}
+prop.table(table(sex, ans, place), margin = c(1,2)) #Frec Rel Marginal por Sexo y País
+```
+
