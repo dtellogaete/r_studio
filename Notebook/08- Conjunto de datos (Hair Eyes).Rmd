@@ -1,0 +1,46 @@
+---
+title: "08- Conjunto de datos (Hair Eyes)"
+author: "Daniel"
+date: "14-10-2019"
+output: html_document
+---
+
+# Ejemplo de color de ojos y de pelo
+HairEyeColor no es un data frame
+
+```{r}
+HairEyeColor
+
+sum(HairEyeColor) -> total
+```
+El total de individuos de la tabla de datos es `r total`
+
+Tabla de frecuencia marginal
+```{r}
+prop.table(HairEyeColor, margin = 3)
+```
+
+```{r}
+prop.table(HairEyeColor, margin = c(1,2))
+```
+
+
+```{r}
+aperm(HairEyeColor, perm = c("Sex", "Eye", "Hair"))
+```
+
+```{r}
+library(kableExtra)
+kable(HairEyeColor)
+```
+
+
+
+
+
+
+
+
+
+
+

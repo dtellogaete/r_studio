@@ -1,0 +1,15 @@
+---
+title: "09 Diagramas"
+author: "Daniel"
+date: "14-10-2019"
+output: html_document
+---
+# Diagrama de Barras 
+
+Es el gráfico más usado para representar variables cualitativas son lod **diagramas de barras (bar plots)**. Como su nombre indica, un diagrama de barras contiene, para cada nivel de la variable cualitativa, una barra de altura su frecuencia.
+
+La manera más sencilla de dibujar una diagrama de barras de las frecuncias absolutas o relativas de una variable cualitativa es usando la instrucción **barplot()** aplicada a la tabla correspondiente.
+
+El argumento **barplot** ha de ser una tabla, y por consiguiente, se ha de aplicar al resultado de la **table()** o de **prop.table()**, nunca al vector de datos original.
+
+
