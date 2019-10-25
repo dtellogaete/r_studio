@@ -1,0 +1,55 @@
+---
+title: "10 Ejercicios"
+author: "Daniel"
+date: "25-10-2019"
+output: html_document
+---
+# Ejemplo final 
+
+## Juntar color de ojos y pelo sin distinguir por sexo
+
+```{r}
+ftable(HairEyeColor)
+male <- HairEyeColor[,, "Male"]
+female <- HairEyeColor[,,"Female"]
+data <- as.table(male+female)
+data
+```
+
+## Manipulación de datos
+
+```{r}
+dimnames(data) = list(
+Pelo =  c("Negro", "Marron", "Pelirrojo", "Rubio" ), 
+Ojos = c("Marrones","Azules", "Pardos", "Verdes" )
+)
+data
+```
+
+## Diagrama de mosaico
+
+```{r}
+plot(data, col = c("lightblue"), main = "Diagrama de mosaico" )
+```
+
+## Datos numéricos
+
+El número total de individuos
+
+```{r}
+sum(data)
+```
+
+Tabla de frecuencia absoluta y relativa de cada variable.
+
+```{r}
+colSums(data)
+rowSums(data)
+round(prop.table(colSums(data)), 3)
+round(prop.table(rowSums(data)), 3)
+```
+
+
+
+
+

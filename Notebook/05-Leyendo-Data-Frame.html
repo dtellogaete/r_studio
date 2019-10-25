@@ -594,12 +594,12 @@ str(df_m)</code></pre>
 <div id="tydiverse" class="section level1">
 <h1>Tydiverse</h1>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## -- Attaching packages -------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## -- Attaching packages ------------------------------------------- tidyverse 1.2.1 --</code></pre>
 <pre><code>## v ggplot2 3.2.1     v purrr   0.3.2
 ## v tibble  2.1.3     v dplyr   0.8.3
 ## v tidyr   1.0.0     v stringr 1.4.0
 ## v readr   1.3.1     v forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ----------------------------------------------- tidyverse_conflicts() --
+<pre><code>## -- Conflicts ---------------------------------------------- tidyverse_conflicts() --
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>iris_petal = select(iris, starts_with(&quot;Petal&quot;))
@@ -636,16 +636,6 @@ head(versicolor,5)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    50 obs. of  2 variables:
 ##  $ Sepal.Length: num  7 6.4 6.9 5.5 6.5 5.7 6.3 4.9 6.6 5.2 ...
 ##  $ Petal.Length: num  4.7 4.5 4.9 4 4.6 4.5 4.7 3.3 4.6 3.9 ...</code></pre>
-</div>
-<div id="aplicando-funcionas-a-data-frames" class="section level1">
-<h1>Aplicando funcionas a data frames</h1>
-<ul>
-<li><strong>sapply(df, función)</strong>: para aplicar una función a todas las columnas de un data frame en un solo paso.</li>
-<li><strong>na.rm = TRUE</strong>: para evitar que el valor que devuelva la función para las columnas que contengan algun NA sea NA.</li>
-<li><strong>aggregate(variables~factors, data =df, FUN = función)</strong>: para aplicar una función a variables de un data frame clasificadas por los niveles de un, o más de un factor.</li>
-<li>Si queremos aplicar la función a más de una variable, tenemos que agruparlas con un <strong>cbind</strong></li>
-<li>Si queremos separar las variables mediante más de un factor, tenemos que agruparlos como signos +</li>
-</ul>
 </div>
 
 

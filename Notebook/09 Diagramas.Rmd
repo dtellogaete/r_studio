@@ -12,4 +12,11 @@ La manera más sencilla de dibujar una diagrama de barras de las frecuncias abso
 
 El argumento **barplot** ha de ser una tabla, y por consiguiente, se ha de aplicar al resultado de la **table()** o de **prop.table()**, nunca al vector de datos original.
 
+# Diagrama circular
 
+En un diagrama circular **pie chart** se representan los niveles de una variable cualitativa como sectores circulares de un círculo, de manera que el ángulo (o equivalente, el área) de cada sector sea proporcional a la frecuencia del nivel al que corresponde.
+
+# Gráficos de Mosaico
+
+Estos gráficos se obtienen sustituyendo cada entrada de la tabla de frecuencias por la región rectangular de área proporcional a su valor.
+Un gráfico de mosaico de una tabla se obtiene con R aplicando la función **plot** a la tabla, o también la función **mosaicplot**. Esta última también se puede aplicar a matrices.

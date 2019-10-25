@@ -1,7 +1,9 @@
 ---
 title: "Graficos"
 author: "Curso"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 ## Gráficos con la función `plot`
 

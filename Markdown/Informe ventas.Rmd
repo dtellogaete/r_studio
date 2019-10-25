@@ -1,0 +1,38 @@
+---
+title: "Grafico"
+author: "Daniel"
+date: "16-10-2019"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# Reporte Ventas Mensuales
+
+```{r}
+
+
+```
+
+```{r}
+
+
+res <- dbSendQuery(con, "SELECT * FROM month_sales")
+dbFetch(res)
+count = dbClearResult(res)
+```
+
+```{r}
+counts <- table(mtcars$vs, mtcars$gear)
+barplot(counts, main="Car Distribution by Gears and VS",
+  xlab="Number of Gears", col=c("darkblue","red"),
+  legend = rownames(counts), beside=TRUE)
+```
+
+
+
+
+
+
+
+
