@@ -1,0 +1,78 @@
+---
+title: "11 Estadistica descriptiva con datos ordinales"
+author: "Daniel"
+date: "08-11-2019"
+output: html_document
+---
+
+# Estadistica descriptiva con datos ordinales
+
+**Datos Ordinales**: Tienen un orden natural que permite acumular observaciones.
+Ejemplo: Escalas likert
+
+*Frecuencia acumulada*: Podemos contar cuantas veces hemos observado un dato menor o igual a este.
+
+Ejemplo notas de estudiantes
+
+```{r}
+notas = ordered(c("S", "A", "N", "Ex", "Ex","S", "S", "Ex", "N", "A", "A", "A",
+                  "A", "N", "S"), levels = c("S", "A", "N", "Ex"))
+
+table(notas)
+```
+Existen 4S, 5A, 3N y 3Ex
+
+Frecuencias absolutas acumuladas
+**Frecuencias relavtiva acumulada**: Fracción del total de las observaciones en tanto por 1 que representa su frecuencia absoluta acumulada.
+
+## Ejemplo2
+En un estudio, aun grupo de clientes de un restaurante se les hizo la siguiente pregunta: ¿Estás contento con el trato ofrecido por los trabajadores del establecimiento?
+Las posibles respuestas forman una escala ordinal con 1<2<3<4<5. Supongamos que se recogieron las siguientes respuestas de 50 técnicos.
+
+```{r}
+set.seed(2018)
+clientes = sample(1:5, 50, replace = TRUE)
+clientes
+```
+```{r}
+set.seed(NULL)
+
+```
+
+## Función cumsum()
+```{r}
+notas
+```
+```{r}
+fAbs = table(notas)
+cumsum(fAbs) # Frec abs acumuladas
+```
+```{r}
+cumsum(prop.table(fAbs)) #Frec. relativas acumuladas
+```
+
+```{r}
+barplot(fAbs, main = "Diagrama de frecuencias absolutas")
+```
+
+calculo de frecuencias relativas acumuladas
+
+```{r}
+cumsum(table(notas))/length(notas)
+```
+
+```{r}
+cumsum(table(notas)/length(notas))
+```
+
+### Analisis de datos ordinales por factor
+
+Para calcular frecuncias acumuladas en una tabla multidimensional, hay que aplicar a la tabla la función **cumsum** mediante la función *apply*.
+
+La sintaxis de la instrucción sería
+
+**apply(tabla, MARGIN = ..., FUN = cumsum)**
+
+donde el valor **MARGIN** ha de ser el de la dimensión en la que queremos acumular las frecuencias: 1 por filas, 2 por columnas.
+
+

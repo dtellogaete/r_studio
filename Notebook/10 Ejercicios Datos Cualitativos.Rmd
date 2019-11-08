@@ -49,7 +49,25 @@ round(prop.table(colSums(data)), 3)
 round(prop.table(rowSums(data)), 3)
 ```
 
+## Diagrama de barras 
 
+```{r}
+barplot(prop.table(colSums(data)), ylim = c(0, 0.4), main = "Frecuencias relativas del color de ojo", col = c("burlywood4", "lightblue", "orange3", "lightgreen"))
+```
 
+## Frecuencias relativas globales y marginales
 
+```{r}
+round(prop.table(data),3)
+round(prop.table(data, margin = 1),3)
+round(prop.table(data, margin = 2),3)
+```
+
+```{r}
+barplot(prop.table(data, margin = 1), beside = 3, legend.text = TRUE, ylim = c(0, 0.8), col = c("black", "burlywood4", "red", "gold"), main = "Frecuencias relativas del color de pelo \n para cada color de ojo")
+```
+
+```{r}
+barplot(t(prop.table(data, margin = 1)), beside = 3, legend.text = TRUE, ylim = c(0, 0.8), col =  c("burlywood4", "lightblue", "orange3", "lightgreen"), main = "Frecuencias relativas del color de ojo \n para cada color de pelo")
+```
 
