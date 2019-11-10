@@ -1,0 +1,93 @@
+---
+title: "Medidas de posición"
+author: "Daniel"
+date: "10-11-2019"
+output: html_document
+---
+
+# Medidas de posición 
+
+Las *medidas de posición* estiman qué valores dividen las observaciones en unas determinadas proporciones.
+Los valores que determinan estas posiciones son conocidos como los *cuantiles* 
+La *mediana* puede interpretarse como una medida de posición, debido a que divide la variable cuantitativa en dos mitades.
+
+Dada una proporción $p \in(0,1)$, el *cuantil de orden p* de una variable cuantitativa, $Q_p$, es el valor más pequeño tal que su frecuencia relativa acumulada es mayor o igual a $p$.
+
+Dicho de otro modo, si tenemos un conjunto de observaciones $x1, ...,x2$ y los ordenamos de menor a mayor, entonces $Qp$ será el número más pequeño que deja a su izquierda (incluyéndose a sí mismo) como mínimo a la fracción $p$ de datos. Es decir, $p\cdot n$
+
+La mediana vendría a ser $Q_{0.5}$, el cuantil de orden 0.5
+
+
+### Ejemplo 
+Consideremos un experimento en el que lanzamos 50 veces un dado de 4 caras y obtenemos los siguientes resultados.
+
+```{r}
+set.seed(260798)
+dado = sample(1:4, 50, replace = TRUE)
+set.seed(NULL)
+length(dado)
+```
+
+
+```{r}
+dado = sort(dado) # Los ordenamos de menor a mayor.
+dado
+```
+
+**Data Frame**
+
+```{r}
+df.dado = data.frame(Puntuacion = 1:4,
+          Fr.abs = as.vector(table(dado)),
+          Fr.rel = as.vector(round(prop.table(table(dado)),2)),
+          Fr.acu = as.vector(cumsum(table(dado))),
+          Fr.racu = as.vector(round(cumsum(prop.table(table(dado))),2)))
+
+df.dado
+```
+
+
+Si nos piden el cuantil $Q_{0.3}$, sabemos que este es el primer elemento de la lista cuya frencuencia relativa acumulada es mayor o igual a 0.3. Este se corresponde con la puntuación 1.
+
+El 30% de los datos, es decir 30% de 50.
+```{r}
+dado[15]
+```
+
+# Cuantiles.
+
+Algunos cuantiles tienen nombre propio: 
+
+* Los *cuartiles*¨son los cuantiles $Q_{0.25}, Q_{0.5}, Q_{0.75}$. Respectivamente, son llamados primer, segundo y tercer cuartil. El primer cuartil, $Q_{0.25}$, será el menor valor que es mayor o igual a una cuarta parte de las observaciones y $Q_{0.75}$, el menor valor que es mayor o igual a tres cuartas partes de los datos observados.
+* El cuantil $Q_{0.5}$ es la mediana.
+* Los *deciles* son los cuantiles $Q_p$ con $p$ un múltiplo de 0.1.
+* Los *percentiles* son los cuantiles $Q_p$ con $p$ un múltiplo de 0.01.
+
+
+La definición de cuantil anteriormente dada es orientativa. La realidad es que exceptuando el caso de la mediana, no hay consenso sobre cómo deben calcularse los cuantiles.Existen diferentes métodos que pueden dar lugar a soluciones distintas.
+
+Para calcular los cuantiles de orden $p$ de una variable cualitativa $x$ con R, se utiliza la instrucción *quantile(x,p)*, la cual dispone de 9 métodos diferentes que se especifican con el parametro *type*. El valor por defecto es *type = 7* y no hace falta especificarlo.
+
+
+### Ejemplo
+
+```{r}
+set.seed(0)
+dados2 = sample(1:6, 15, replace = TRUE)
+dados2
+```
+
+```{r}
+set.seed(NULL)
+quantile(dados2, 0.25) #primer cuartil
+```
+
+```{r}
+quantile(dados2, 0.8)
+```
+
+
+
+
+
+

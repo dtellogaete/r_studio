@@ -5,26 +5,56 @@ date: "08-11-2019"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# Estadistica descriptiva con datos cuantitativos
+
+Los *datos cuantitativos* son los que expresan cantidades que se representan mediante numeros. Estos de clasifican en continuos y discretos.
+
+* Los *datos continuos* son los que, si existiese la posibilidad de medirlos con precisión infinita, en pricipio podrian tomar todos los valores de un intervalo de recta real. Ejemplo: peso, altura, tiempo.
+
+* Por su parte, los *datos discretos* son los que pueden tomar un solo conjunto contable de valores. En número de colores de un gato, el número de individuos que conforman una población son algunos ejemplos de este tipo de datos.
+
+Con la *vaariables cuantitativas*, se pueden utilizar las frecuencias que hemos visto hasta el momento: absoluta, relativa, acumulada y relativa acumulad. Los datos cuantitativos se pueden ordenar en el orden de los numeros reales.
+
+Los datos cuantitativos admiten dos tipos de tratamiento según trabajemos con los *raw data*¨(datos brutos u originales) o bien los agrupemos en clases o intervalos.
+
+# Frecuencias de datos cuantitativos
+
+Ejemplo edad de las personas que entran al museo.
+
+```{r}
+edad = c(15, 18, 25, 40, 30, 29, 56, 40, 13, 27, 42, 23, 11, 26, 25, 32, 30,
+         40, 33, 29)
+
+table(edad)
+```
+Calculo de las frecuencias de la forma tradicional
+
+```{r}
+round(prop.table(table(edad)),3)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+Frecuencias acumuladas
+```{r}
+cumsum(table(edad))
 ```
 
-## Including Plots
+Frecuencias relativas acumuladas.
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+round(cumsum(prop.table(table(edad))),3)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+---
+title: "Medidas de tendencia central"
+author: "Daniel"
+date: "10-11-2019"
+output: html_document
+---
+
+# Medidas de tendencia central
+
+Las *medidas de tendencia central* son las que dan un valor representativo a todas las observaciones. Algunas de las más importantes son:
+* La *media aritmética* o *valor medio*
+* La *mediana*, que representa el valor central en la lista ordenada de observaciones.
+* La *moda* es el valor (o valores) de la máxima frecuencia (absoluta o relativa el resultado será el mismo)
+
+# Medias
+
+```{r}
+x = c(32, 45, 67, 43, 28, 17, 48, 95)
+n = length(x)
+```
+
+Vamos a calcular las medias del vector `r x` que está formado por `r n` observaciones.
+
+## Media aritmetica
+
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$$
+
+```{r}
+sum(x)/n #mean
+```
+
+## Media aritmética ponderada
+
+$$\frac{\sum_{i=1}nw_i\cdot x_i}{\sum_{i=1}^nw_i}$$
+
+Vector de pesos w
+```{r}
+w = c(1, 2, 2, 3, 3, 2, 2, 1)
+sum(w*x)/sum(x)
+
+```
+
+## Media geométrica
+
+$$\left(\prod_{i^1}^n x_i\right)^{1/n}$$ 
+```{r}
+prod(x)^(1/n)
+prod(x^(1/n))
+```
+
+## Media armónica
+
+$$\bar{x}_A = \frac{n}{\sum_{i=1}^{n}\frac{1}{x_1}}$$
+
+```{r}
+n/sum(1/x)
+```
+
+# Min y max
+```{r}
+min(x)
+max(x)
+```
+
+
+
+
+
+
+
+
