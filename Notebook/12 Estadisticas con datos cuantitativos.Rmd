@@ -45,11 +45,72 @@ Frecuencias relativas acumuladas.
 round(cumsum(prop.table(table(edad))),3)
 ```
 
+## Frecuencia de datos cuantitativos
 
+En general supongamos que tenemos $n$ observaciones de una propiedad que se mide con un número real y obtenemos la variable cuantitativa formada por datos
 
+$x_1, ..., x_n$
 
+Sean ahora $X_1,...,X_2$ los valores distintos que aparecen en esta lista de datos y considerémoslos ordenados.
 
+$X_1 <X_2<X...<X_k$
 
+En variables cuantitativas
+* La frecuencia absoluta es $X_i$ es el número $n_i$ de elementos que son iguales a $X_i$
+* La frecuencia relativa de $X_i$ es $f_i= n_i/n$
+* La frencuencia absoluta acumulada de $X_i$ es $N_i = \sum_{j}^{i}n_j$
+* La frecuencia relativa acumulada de $X_i$ es $F_i = N_i/n$
+
+## Ejemplo
+Lanzamos 25 veces un dado de 6 caras y anotamos las puntuaciones obtenidas en cada tirada.
+
+```{r}
+set.seed(162017)
+dados = sample(1:6,25, replace = TRUE)
+dados
+```
+
+```{r}
+set.seed(NULL)
+```
+
+**Frecuencias absolutas**
+
+```{r}
+table(dados)
+```
+
+**Frecuencias relativas**
+
+```{r}
+round(prop.table(table(dados)),2)
+```
+
+**Frecuencia absoluta acumulada**
+
+```{r}
+cumsum(table(dados))
+```
+
+**Frecuancias relativas acumuladas**
+
+```{r}
+round(cumsum(prop.table(table(dados))),2)
+```
+
+**Tabla completa**
+
+```{r}
+dados.df=data.frame(Puntuacion = 1:6,
+                    Fr.abs = as.vector(table(dados)),
+                    Fr.rel = as.vector(round(prop.table(table(dados)),2)),
+                    Fr.acu = as.vector(cumsum(table(dados))),
+                    Fr.racu = as.vector(round(cumsum(prop.table(table(dados))),2)))
+
+dados.df
+```
+
+**OJO** para entrar una tabla unidimensional como una variable en un data frame, es conveniente transformarla en vector como **äs.vector**. Si no, cada *table* y cada *prop.table* añadirán una columna extra con los nombres de los niveles.
 
 
 
