@@ -41,3 +41,62 @@ En cambio, si la muestra es relativamente pequeña (digamos $n <30$), entonces l
 La diferencia entre la desviación típica y desviación típica muestral es análoga.
 
 Con **R**, calcularemos la varianza y la desviación típica **muestrales**. Con lo cual, si queremos calcular las que no son muestrales, tendremos que multiplicarlas por $\frac{n-1}{n}$, donde $n$ es el tamaño de la muestra.
+
+
+Varianza y dispersión típica
+
+*Todo lo muestral lleva tilde.*
+
+```{r}
+dados2
+```
+
+**Rango**
+```{r}
+diff(range(dados2))
+```
+
+**Rango intercuartilico**
+
+```{r}
+IQR(dados2)
+```
+
+**Varianza Muestral**
+```{r}
+var(dados2)
+```
+
+**Desviación típica muestral**
+```{r}
+sd(dados2)
+
+```
+
+
+**Varianza**
+```{r}
+n = length(dados2)
+var(dados2)*(n-1)/n
+
+```
+
+
+**Desviación tipica**
+```{r}
+sd(dados2)*sqrt((n-1)/n)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

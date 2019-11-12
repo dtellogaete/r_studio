@@ -1,0 +1,16 @@
+---
+title: "Diagrama de caja"
+author: "Daniel"
+date: "11-11-2019"
+output: html_document
+---
+
+# Diagrama de caja
+
+
+El **diagrama de caja** o **box plot** es un tipo de gráfico que básicamente, remarca 5 valores estadísticos:
+* La mediana, representada por la línea gruesa que divide la caja.
+* El primer y tercer cuartil, que son los lados inferior y superior, respectivamente. De este modo, la altura de la caja es el rango intercuantilico.
+* Los extremos, los valores $b_{inf}, b_{sup}$, son los **bigotes(whiskers)** del gráfico. Si $m$ y $M$ son el mínimo y máximo de la variable cuantitativa, entonces los extremos se calculan del siguiente modo:
+
+

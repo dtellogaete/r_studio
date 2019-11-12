@@ -1,0 +1,69 @@
+---
+title: "Funciones básicas"
+author: "Daniel"
+date: "11-11-2019"
+output: html_document
+---
+
+# Funciones básicas para aplicar a un factor numérico.
+
+## Función summary()
+
+La función **summary()** aplicada  a un vector numérico o a una variable cuantitativa nos devuelve un resumen estadistico con los valores mínimo y máximo del vector, sus tres cuartiles y su media.
+
+Al aplicar esta función a un data frame, esta se aplica a todas sus variables de forma simultánea.
+
+```{r}
+cangrejos = read.table("../data/datacrab.txt")
+cangrejos = cangrejos[-1] #Eliminamos la primera columna
+summary(cangrejos) #Aplicamos la función summary
+
+```
+
+Peso y Anchura de los cangrejos con 3 colores.
+
+```{r}
+cangrejos = read.table("../data/datacrab.txt")
+summary(subset(cangrejos, color.spine == 2, c("weight", "width")))
+```
+
+## Función by()
+
+La función **by()** se utiliza para aplicar una determinada función a algunas columnas de un data frame segmentándolas según los niveles de un factor.
+
+La sintaxis de esta función es **by(columnas, factor, FUN=funcion)**.
+
+Con lo cual, haciendo uso de la función **by** y espificando **FUN = summary**, podremos calcular el resumen estadístico anteriormente comentado a subpoblaciones definidas por los niveles de un factor.
+
+
+```{r}
+by(iris[,c(1,3)], iris$Species, FUN = summary)
+```
+
+## Función aggregate()
+
+La función **by** como la función **aggregate** son equivalentes, pero los resultados se muestran de manera diferente en función de cual utilicemos.
+
+El orden lo da por Species.
+
+```{r}
+aggregate(cbind(Sepal.Length, Petal.Length)~Species, data = iris,
+          FUN = summary)
+```
+
+### NA
+La mayoria de las funciones vistas a lo largo de este tema no funcionan bien con valores NA.
+
+Para no tenerlos en cuenta a la hora de aplicar estas funciones, hay que especificar el parámetro **na.rm = TRUE** en el argumento de la función.
+
+```{r}
+x = c(1,2,3,NA)
+sum(x, na.rm = TRUE)
+```
+
+
+
+
+
+
+
