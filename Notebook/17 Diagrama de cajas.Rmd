@@ -13,4 +13,73 @@ El **diagrama de caja** o **box plot** es un tipo de gráfico que básicamente, 
 * El primer y tercer cuartil, que son los lados inferior y superior, respectivamente. De este modo, la altura de la caja es el rango intercuantilico.
 * Los extremos, los valores $b_{inf}, b_{sup}$, son los **bigotes(whiskers)** del gráfico. Si $m$ y $M$ son el mínimo y máximo de la variable cuantitativa, entonces los extremos se calculan del siguiente modo:
 
+$$b_{inf} = max \{{m,Q_{0.25}-1.5(Q_{0.75}-Q_{0.25})\}}$$
+
+$$b_{sup} = min \{{M,Q_{0.75}+1.5(Q_{0.75}-Q_{0.25})\}}$$
+* **Valores atípicos o outliers**, que son los que están más allá de los bigotes. Se marcan como puntos aislados.
+
+## Función boxplot
+
+```{r}
+boxplot(dados2, main= "Un diagrama de caja")
+```
+
+```{r}
+boxplot(dado, dados, dados2)
+```
+
+```{r}
+boxplot(iris[,1:4], col= "lightblue")
+```
+
+
+## Función boxplot
+
+Agrupar varios diagramas de caja en un solo gráfico tiene por objetivo poder compararlos visualmente, lo cual tiene sentido cuando las variables 
+La mayoría de las veces, querremos comparar los diagramas de cajas de una misma variable cuantitativa segmentada por los niveles de un factor.
+
+La sintaxis de la instrucción para dibujar en un único gráfico los diagramas de caja de una variable numérica de un data frame, en función de los niveles de un factor del mismo data frame es **boxplot(var.numerica~factor, data = data frame)**.
+
+```{r}
+boxplot(circumference~Tree, data = Orange, ylab = "Circunferencia del tronco (mm)", main = "Boxplot de los naranjos en función del tipo de árbol")
+```
+
+```{r}
+boxplot(iris$Sepal.Length~iris$Species)
+```
+
+```{r}
+boxplot(Sepal.Length~Species, data = iris)
+```
+
+### Parametros de la función boxplot
+
+Todos los parámetros de la función **plot()** que tengan sentido pueden ser utilizados en los argumentos de la función **boxplot()**.
+
+La función **boxplot()** dispone de algunos parámetros específicos:
+* **notch** igualado a **TRUE** añade una muesca en la mediana de la caja. Si se da el caso de que las muescas de dos diagramas de cajas no se 
+
+```{r}
+boxplot(Sepal.Width~Species, data=iris, ylab="Anchura del sepalo (cm)",
+        notch = TRUE, col= c("cyan", "cyan2", "cyan4"),
+        main ="Boxplot de iris") 
+```
+
+Si quisieramos marcar de alguna forma en un diagrama de caja, cosas que puede ser muy útil en ocasiones, la media aritmetica de la variable correspondiente, podriamos hacerlo mediante le funciíon *points*
+
+```{r}
+boxplot(Sepal.Width~Species, data=iris, ylab= "Anchura del sepalo (cm)")
+medias = aggregate(Sepal.Width~Species, data = iris, FUN = mean)
+points(medias, col="red", pch = 15)
+```
+
+### Estructura interna de boxplot
+
+Podemos estudiar la función interna de algunos objetos con la función **str**.  Dicha función aplicada a un boxplot, produce una list: **str(boxplot(circumference~Tree, data= Orange))**. Destacaremos dos de sus componentes aquí:
+* **stats** devuelve los valores $b_{inf},Q_{0.25},Q_{0.5},Q_{0.75},b_{sup}$.
+* **out** retorna valores atípicos. En caso de haber diversos diagramas en un plot, la componente **group** indica a que diagramas pertenecen estos outliers.
+
+```{r}
+str(boxplot(Sepal.Width~Species, data=iris, ylab= "Anchura del sepalo (cm)"))
+```
 
