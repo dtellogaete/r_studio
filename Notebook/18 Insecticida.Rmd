@@ -5,3 +5,33 @@ date: "13-11-2019"
 output: html_document
 ---
 
+# Analisis de spray insecticida
+
+
+Cargamos los datos del dataset de `R` llamado `InsectSprays`
+
+```{r}
+data = InsectSprays
+head(data)
+```
+
+```{r}
+str(data)
+```
+
+```{r}
+by(data$count, data$spray, FUN = summary)
+```
+
+```{r}
+aggregate(count~spray, data = data, FUN = sd)
+```
+
+```{r}
+boxplot(count~spray, data = data, col = "lightgreen",
+        xlab= "Tipo de Spray", ylab= "Insectos Muertos")
+```
+
+
+
+
