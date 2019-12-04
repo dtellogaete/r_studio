@@ -1,6 +1,8 @@
 ---
 title: "Datos Cuantitativos agrupados"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 # Datos cuantitativos agrupados
@@ -264,7 +266,7 @@ X
 O bien, también podemos calcular mucho más rápido como sucesión:
 
 ```{r}
-X=X_{1}+A*(0:9)
+X=X1+A*(0:9)
 X
 ```
 
@@ -274,6 +276,14 @@ X=(L[1:length(L)-1]+L[2:length(L)])/2
 X
 ```
 
+## Agrupando los datos de R
+
+Al agrupar los datos, lo que hacemos es convertir nuestra variable cuantitativa en un factor cuyos niveles son las clases en que ha sido dividida e identificamos cada dato con su clase.
+
+A la hora de etiquetar los niveles, podemos elegir 3 codificaciones:
+* Los intervalos
+* Las marcas de clase (el punto medio de cada intervalo)
+* El número de orden de cada intervalo
 
 
 

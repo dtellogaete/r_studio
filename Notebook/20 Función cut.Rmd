@@ -1,0 +1,233 @@
+---
+title: "20 Función cut"
+author: "Daniel"
+date: "03-12-2019"
+output: html_document
+---
+
+# La función cut
+
+Esta función es la básica en R para agrupar un vector de datos numéricos y codificar sus valores con clases a las que pertenecen.
+
+Su sintaxis básica es
+**cut(x,breaks=..., labels=..., right=...)**
+* **x** es el vector numérico, nuestra variable cuantitativa.
+* **breaks** puede ser un vector numérico formado por los extremos de los intervalos en los que queremos agrupar nuestros daros y que habremos calculado previamente. También puede ser un número *k*, en cuyo caso R agrupa los datos en *k* clases. Para este caso, R divide el intervalo comprendido entre los valores mínimo y máximo de *x* en *k* intervalos y, a continuación, desplaza ligeramente el extremo inferior del primer intervalo a la izquierda y el extremo del último a la derecha.
+* **labels** es un vector con las etiquetas de los intervalos. Su valor por defecto es utilizar la etiqueta de los mismos intervalos. Si especificamos **labels = FALSE**, obtendremos los intervalos por números naturales correlativos, empezando por 1. Para utilizar como etiqueta las marcas de clase o cualquier otra codificación, hay que entrarlo como valor de este parametro.
+* **right** es un parámetro que igualado a **FALSE** hace que los intervalos que consideremos sean cerrados por la izquierda y abiertos por la derecha. Este no es su valor por defecto.
+* **include.lowest** igualado a **TRUE** combinado con **right = FALSE** hace que el último intervalo sea cerrado. Puede sernos útil en algunos casos.
+
+En cualquier caso, el resultado de la función **cut** es una lista con los elemenos del vector original codificados con las etiquetas de las clases a las que pertenecen. Bien puede ser un factor o un vector.
+
+```{r}
+petals = iris$Petal.Length
+cut(petals, breaks = 5, right = FALSE)
+```
+
+```{r}
+cut(petals, breaks = ceiling(sqrt(length(petals))), right = FALSE)
+```
+
+```{r}
+cut(petals, breaks = c(1,2,3,4,5,6,7), right = FALSE, labels = FALSE)
+```
+
+```{r}
+cut(petals, breaks = 5, right = FALSE, 
+    labels = c("Peq", "Norm", "Gran", "XGran", "Gigan"))
+```
+
+```{r}
+iris_df = iris
+iris_df$div1 = cut(petals, breaks = 5, right = FALSE, 
+    labels = c("Peq", "Norm", "Gran", "XGran", "Gigan"))
+iris_df
+```
+
+# Agrupando datos en R
+
+Al agrupar datos, lo que hacemos es convertir nuestra variable cuantitativa en un factor cuyos niveles son las clases en que ha sido dividida e identificamos cada dato con su clase. 
+
+A la hora de etiquetar los niveles, podemos elegir 3 codificaciones:
+* Los intervalos.
+* Las marcas de clase (el punto medio de cada intervalo)
+* El número de orden de cada intervalo.
+
+# La función hist
+
+El cálculo de las frecuencias con R podemos hacerlo mediante las funciones **table, prop.table** y **cumsum**
+
+También podemos utilizar la función **hist**, que internamente genera una list cuya componente **count** es el vector de las frecuencias absolutas de las clases. Por consiguiente, para calcular estas frecuencias, podemos utilizar la sintaxis.
+
+**hist(x, breaks=..., right=FALSE, plot=FALSE)$count**
+
+Conviene igualar el parámetro **breaks** al vector de los extremos del intervalo debido a que **cut** y **hist** hacen uso de diferentes métodos para agrupar los datos cuando se especifica solamente el número *k* de clases.
+
+El resultado de **hist** incluye la componente **mids** que contiene el vector de puntos medios de los intervalos, es decir, nuestras marcas de clase.
+
+Podemos automatizar el cálculo de la tabla de frecuencias, utilizando las dos funciones que mostramos a continuación.
+
+La primera sirve en el caso en que vayamos a tomar todas las clases de la misma amplitud. Sus parámetros son: *x*, el vector con los datos cuantitativos; *k*, el número de clases; *A*, su amplitud; y *p* la precisión de los datos(p = 1 si la presición son unidades, p=0.1 si la presición son décimas de unidad...)
+
+Por su parte, la segunda es para cuando conocemos los extremos de las clases. Sus parámetros son: *x*, el vector con los datos cuantitativos; *L*, el vector de extremos de clases; y *V*, un valor lógico, que ha de ser **TRUE** si queremos que el último intervalo sea cerrado, y **FALSE** en caso contrario.
+
+#Funciones para las tablas de frecuencias
+
+
+```{r}
+#Primera función
+TablaFrecs = function(x,k,A,p){
+  L = min(x)-p/2+A*(0:k)
+  x_cut = cut(x, breaks = L, right = FALSE)
+  intervals = levels(x_cut)
+  mc = (L[1]+L[2])/2+A*(0:(k-1))
+  Fr.abs = as.vector(table(x_cut))
+  Fr.rel = round(Fr.abs/length(x),4)
+  Fr.cum.abs = cumsum(Fr.abs)
+  Fr.cum.rel = cumsum(Fr.rel)
+  tabla = data.frame(intervals, mc, Fr.abs, Fr.cum.abs, Fr.rel,
+                     Fr.cum.rel)
+  tabla
+}
+
+
+#Segunda función
+
+TablaFrecs.L = function(x,L,V){
+  x_cut = cut(x, breaks = L, right = FALSE, include.lowest = V)
+  intervals = levels(x_cut)
+  mc = (L[1:length(L)-1]+L[2:length(L)])/2
+  Fr.abs = as.vector(table(x_cut))
+  Fr.rel = round(Fr.abs/length(x),4)
+  Fr.cum.abs = cumsum(Fr.abs)
+  Fr.cum.rel = cumsum(Fr.rel)
+  tabla = data.frame(intervals, mc, Fr.abs, Fr.cum.abs, Fr.rel,
+                     Fr.cum.rel)
+  tabla
+}
+
+```
+
+
+La tabla de frencuencias de la longitud de los pétalos de *Iris* es: 
+
+```{r}
+TablaFrecs(petals, k = 6, A =1, p = 0.1)
+```
+
+```{r}
+TablaFrecs.L(petals, L = c(1,3,4,5,5.5,6,6.5,7), V=FALSE)
+```
+
+## Ejemplo
+
+Se han recogido las notas de un examen de historia a los 100 alumnos de primero de bachillerato de un instituto.
+
+```{r}
+notas = c(6,0,3,3,8,2,7,9,10,0,8,3,1,10,4,5,10,6,10,8,7,10,5,5,7,9,5,
+          9,5,5,6,2,9,7,5,10,5,6,4,0,10,2,6,1,9,0,9,9,7,6,4,8,9,8,9,4,
+          1,1,9,8,6,0,9,10,2,6,0,5,8,10,3,6,4,3,9,7,3,4,2,1,10,7,6,10,
+          9,0,0,10,2,10,2,1,5,2,3,0,8,4,0,7)
+
+notas
+```
+
+```{r}
+# Definimos vector de extremos
+L = c(0,5,7,9,10)
+# Definimos notas1 como el resultado de la codificación en intervalos utilizando como etiquetas los propios intervalos.
+notas1 = cut(notas, breaks = L, right = FALSE, include.lowest = TRUE)
+notas1
+
+```
+
+
+```{r}
+# Definimos las marcas de clase
+MC = (L[1:length(L)-1]+L[2:length(L)])/2
+```
+
+
+```{r}
+#Definimos notas2 como el resultado de la codificación en intervalos utilizando como etiquetas las marcas de clase.
+notas2= cut(notas, breaks = L,labels = MC, right = FALSE,
+            include.lowest = TRUE)
+notas2
+
+```
+
+```{r}
+# Definimos notas3 como el resultado de la codificación en intervalos utilizando como etiquetas la posición ordenada del intervalo (1,2,3 o 4)
+
+notas3 = cut( notas, breaks = L, labels = FALSE, right = FALSE,
+             include.lowest = TRUE)
+notas3
+```
+
+```{r}
+# Definimos notas4 como el resultado de la codificación en intervalos utilizando como etiquetas: Susp, Aprob, Not y Exc.
+
+notas4= cut(notas, breaks = L, labels = c("Susp","Aprob","Not","Exc"),
+            right = FALSE, include.lowest = TRUE)
+notas4
+
+```
+
+
+¿Qué había ocurrido si le hubiéramos pedido a R que cortase los datos en 4 intervalos?
+
+```{r}
+cut(notas, breaks = 4, right = FALSE, include.lowest = TRUE)
+```
+
+
+Trabajaremos con **notas4** y calcularemos sus frecuencias
+
+```{r}
+table(notas4) #Fr. Abs
+```
+
+
+```{r}
+prop.table(table(notas4)) #Fr. Rel
+```
+
+```{r}
+cumsum(table(notas4)) # Fr. Abs. Cum
+```
+
+```{r}
+cumsum(prop.table(table(notas4)))
+```
+
+PODRIAMOS HABER OBTENIDO TODO LO ANTERIOR HACIENDO USO DE LA FUNCION **hist**
+
+```{r}
+notasHist = hist(notas, breaks = L, right = FALSE, 
+                 include.lowest = TRUE, plot = FALSE)
+
+FAbs = notasHist$count
+FRel = prop.table(FAbs)
+FAbsCum = cumsum(FAbs)
+FRelCum = cumsum(FRel)
+
+```
+
+
+### Data Frame
+
+```{r}
+intervalos = c("[0,5)","[5,7)","[7,9)","[9,10]")
+calificacion = c("Suspenso", "Aprobado", "Notable", "Excelente")
+marcas = notasHist$mids
+tabla.Fr = data.frame(intervalos, calificacion, marcas, FAbs, FAbsCum,
+                      FRel, FRelCum)
+tabla.Fr
+```
+
+O con la función
+
+```{r}
+TablaFrecs.L(notas, L, TRUE)
+```
+
