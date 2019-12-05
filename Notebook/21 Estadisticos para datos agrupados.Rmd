@@ -1,0 +1,107 @@
+---
+title: "21. Estadisticos para datos agrupados"
+author: "Daniel"
+date: "04-12-2019"
+output: html_document
+---
+
+# Estadisticos para datos agrupados
+
+Al tener una muestra de datos numéricos, conviene calcular los *estadísticos* antes de realizar los agrupamientos, puesto que de lo contrario podemos perder información.
+
+Hay situaciones en que los datos que obtenemos ya se encuentran agrupados. En estos casos, aún sigue siendo posible calcular los estadísticos y utilizarlos como aproximaciones de los estadísticos de los datos reales, los cuales no conocemos.
+
+La media $\bar{x}$, la varianza $s^{2}$, la varianza muestral $\tilde{s}^2$, la desviación típica $s$ y la desviación típica muestral $\tilde{s}$, de un conjunto de datos agrupados se calculan mediante las formulas que para los datos no agrupados con la única diferencia de que sustituimos cada clase por su marca de clase y la contamos.
+
+Es decir, si tenemos $k$ clases, con sus respectivas marcas $X_1, ...,X_k$ con frecuencias absolutas $n_1,..., n_k$ de forma que $\sum_{j=1}^{k}{n_j}$ Entonces.
+
+$$\bar{x} = \frac{\sum_{j=1}^{k}{n_jX_j}}{n}$$
+
+$$s^2 = \frac{\sum_{j=1}^{k}{n_jX_j^{2}}}{n}-\bar{x}^2$$
+
+$$\tilde{s}^2 = \frac{n}{n-1}\dot{s^2}$$
+
+$$s=\sqrt{s^2}$$
+
+$$\tilde{s} =\sqrt{\tilde{s}^2}$$
+
+## Intervalo Modal
+
+En lo referente a la moda, esta se sustituye por el **intervalo modal** que es la clase con mayor frecuencia(absoluta o relativa) 
+
+En el caso en que un valor numérico fuera necesario, se tomaría su marca de clase.
+
+## Intervalo crítico para la mediana
+
+Se conoce como **intervalo crítico para la mediana**, $[L_{c}, L_{c+1})$, al primer intervalo donde la frecuencia relativa acumulada sea mayor o igual que 0.5.
+
+Denotemos por $n_c$ su frecuencia absoluta, por $A_c= L_{c+1}-L_{c}$, su amplitud y por $N_{c-1}$ la frecuencia acumulada del intervalo inmediatamente anteruior (en caso de ser $[L_{c},L_{c+1})=[L_{1},L_{2})$, entonces $N_{c-1}=0$). Entonces, $M$ será una aproximación para la mediana de los datos "reales" a partir de los agrupados.
+
+$$M=L_{c}+A_{c} \cdot \frac{\frac{n}{2}-N_{c-1}}{n_c}$$
+## Aproximación de los cuantiles
+
+La fórmula anterior nos permite aproximar el cuantil $Q_{p}$ de los datos "reales" a partir de los datos agrupados:
+
+$$Q_p = L_p+A_p\frac{p \cdot n-N_{p-1}}{n_p}$$
+donde el intervalo $[L_p,L_{p+1}$ denota el primer intervalo cuya frecuencia relativa acumulada es mayor o igual a $p$
+
+
+```{r}
+tabla = TablaFrecs(cw,10,1.3,p =0.1)
+tabla
+```
+
+### Solución
+
+```{r}
+#Total de cangrejos
+TOT = tabla$Fr.cum.abs[10]
+TOT
+```
+
+```{r}
+#anchura media
+anchura.media = round(sum(tabla$Fr.abs*tabla$mc)/TOT,3)
+anchura.media #Media
+```
+
+```{r}
+#anchura var
+anchura.var = round(sum(tabla$Fr.abs*tabla$mc^2)/TOT-anchura.media^2,3)
+anchura.var #Varianza
+```
+
+```{r}
+anchura.dt = round(sqrt(anchura.var),3)
+anchura.dt #Desviación típica
+
+```
+
+```{r}
+I.modal=tabla$intervals[which(tabla$Fr.abs == max(tabla$Fr.abs))]
+I.modal #Intervalo modal
+```
+
+```{r}
+I.critic = tabla$intervals[which(tabla$Fr.cum.rel >=0.5)]
+I.critic[1] #Intervalo critic
+```
+
+```{r}
+#Mediana
+n= TOT
+Lc = L[4]
+Ac = L[5]-L[4]
+Nc.ant =tabla$Fr.cum.abs[3]
+nc =tabla$Fr.abs[4]
+M=Lc+Ac*((n/2)-Nc.ant)/nc
+M
+```
+
+```{r}
+median(cw)
+```
+
+
+
+
