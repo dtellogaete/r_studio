@@ -102,6 +102,78 @@ histAbsCum = function(x,L){
 ```
 
 
+# Histograma de frecuencias relativas
+
+En estos histogramas es comun superponer una curva que estime la densidad de la distribución de la variable cuantitativa definida por la caracteristica que estamos midiendo.
+
+La **densidad** de una variable es una curva cuya área comprendida entre el eje de las abcisas y la propia curva sobre un intervalo es igual a la fracción de individuos de la población que caen dentro de este intervalo.
+
+## Campana de Gauss 
+La densidad más famosa: la *Campana de Gauss*. Esta corresponde a una variable que siga una dsitribución normal.
+
+La forma de la campana depende de dos parámetros: el valor medio, $\mu$, y su desviación típica, $\sigma$
+
+
+![Campana de Gauss](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Normal_distribution_pdf.png/800px-Normal_distribution_pdf.png)
+
+## Dibujando la curva de densidad
+
+Existen muchos métodos con los cuales estimar la densidad de distribución a partir de una muestra. Una de ellas es mediante la función **density** de R. Al aplicarla a un conjunto de datos, produce una **list** que incluye los vectores **x** e **y** que contienen la primera y segunda cordenadas, respectivamente, de 512 puntos de la forma (x,y) sobre la curva de densidad estimada.
+
+Aplicando **plot** o **lines** a este resultado segun toque, obtenemos la representación gráfica de esta curva.
+
+## Histograma de frecuencias relativas.
+
+```{r}
+histRel = function(x,L){
+  h= hist(x,breaks = L, right = FALSE, plot= FALSE)
+  t= round(1.1*max(max(density(x)[[2]]), h$density),2)
+  plot(h, freq=FALSE, col= "lightgray",
+       main = "Histograma de frec. relativas\ny curva de densidad
+       estimada", xaxt = "n", ylim = c(0,t), xlab ="Intervalos",
+       ylab= "Densidad")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels=round(h$count/length(x),2),
+       col= "blue")
+  lines(density(x), col= "purple")
+  
+}
+```
+
+## Histograma de frecuencias relativas acumuladas
+
+En este último tipo de histograma se suele superponer una curva que estime la **función de distribución** de la variable definida por la caracteristica que estamos midiendo.
+
+Esta función de distribución, en cada punto nos da una fracción de individuos de la población que caen a la izquierda de este punto: su frecuencia relativa acumulada.
+
+En general, la función de distribución en un valor determinado se obtiene hallando el área de la función de densidad que hay a la izquierda del valor.
+
+```{r}
+histRelCum = function(x,L){
+  h=hist(x, breaks = L, right = FALSE, plot= FALSE)
+  h$density = cumsum(h$count)/length(x)
+  plot(h, freq=FALSE,
+       main="Histograma de frec. rel. acumuladas\n y curva de distribución estimada",
+       xaxt="n", col="lightgray", xlab="Intervalos",
+       ylab= "Frec. relativas acumuladas")
+  axis(1, at=L)
+  text(h$mids, h$density/2, labels=round(h$density, 2), col="blue")
+  dens.x = density(x)
+  dens.x$y = cumsum(dens.x$y)*(dens.x$x[2]-dens.x$x[1])
+  lines(dens.x,col= "purple", lwd=2)
+}
+```
+
+```{r}
+histAbs(cw, L)
+```
+
+
+
+
+
+
+
 
 
 
