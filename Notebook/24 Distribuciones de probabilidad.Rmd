@@ -1,0 +1,53 @@
+---
+title: "Distribuciones de probabilidad"
+author: "Daniel"
+date: "07-12-2019"
+output: html_document
+---
+
+# Distribuciones de probabilidad
+
+## Conceptos básicos
+
+* **Expetimento aleatorio**. Experimento que efectuado en las misma condiciones puede dar lugar a resultados diferentes.
+* **Suceso elemental**. Cada uno de los posibles resultados del experimento aleatorio.
+* **Espacio muestral**. Conjunto $\Omega$ formado por todos los sucesos elementales del experimento aleatorio.
+
+Ejemplo: Lanzar una moneda es un experimento aleatorio. Los sucesos elementales son: sacar cara (C) y sacar cruz (+).
+El espacio muestral de este experimento es $\Omega= {\{C,+}\}$
+
+* **Suceso**. Subconjunto del espacio muestral
+* **Suceso total o seguro**. $\Omega$
+
+**Ejemplo**: Lanzar un dado es un experimento aleatorio.
+Algunos sucesos podrían ser: sacar número par ({2,4,6}), sacar mayor que 4 ({5,6}), sacar número múltiplo de 3 ({3,6})...
+El suceso total de este experimento aleatorio es $\Omega = \{1,2,3,4,5,6\}$.
+Un ejemplo de un suceso imposible de este experimento aleatorio es $\emptyset = {7}$ sacar 7.
+
+**Operaciones con sucesos**. Sean $A,B\subseteq \Omega$ sucesos. Entonces,
+* $A\cup B$ es el suceso unión (resultados pertencen a $A$, o a $B$, o a ambos)
+* $A\cap B$ es el suceso intersección (resultados pertenecen a $A$ y $B$)
+* $A^c$ es el suceso complementario (resultados que no pertenecen a $A$)
+* $A-B=A\cap B^{c}$ es el suceso diferencia (resultados que pertenencen a $A$ pero no a $B$).
+**Sucesos incompatibles**. Si $A\cap B=\emptyset$
+
+**Probabilidad de un suceso**. Número entre 0 y 1 (ambos incluidos) que mide la expectativa de que se dé este suceso.
+
+**Ejemplo**
+* La probabilidad de sacar un 6 al lanzar un dado estándar no trucado es $\frac{1}{6}$.
+* La probabilidad de sacar un 6 al lanzar un dado de 4 caras es 0.
+* La probabilidad de sacar un 6 al lanzar un dado de 20 caras es $\frac{1}{20}$
+* **Suceso vacío o imposible**. $\emptyset$
+
+**Probabilidad**. Sea $\Omega$ el espacio muestral de un experimento aleatorio. Suponiendo que $\Omega$ es finito, una probabilidad sobre $\Omega$ es una aplicación.
+$$p:\mathcal{P} (\Omega)\longrightarrow[0,1]$$
+que satisface
+* $0 \leq p(A) \leq 1 \forall A\in \mathcal{P} (\Omega)$
+* $p(\Omega)=1$
+* Si ${A_1,...,A_n}$ son sucesos incompatibles dos a dos $(A_i\cap A_j = \emptyset \forall_i \neq j)$
+$$p(A_i \cup ...\cup A_n) = p(A_1)+...+p(A_n)$$
+
+<span style="color:red">*Notación:*</span>: Si $a \in \Omega$, escribiremos $p(a)$ en vez de $p({a})$
+
+
+

@@ -1,0 +1,205 @@
+---
+title: "23 Regresión Lineal"
+author: "Daniel"
+date: "07-12-2019"
+output: html_document
+---
+
+# Regresión Lineal
+
+Supongamos que tenemos una serie de puntos en el plano cartesiano $\mathbb{R}^2$, de la forma
+$$(x_1,y_1),...,(x_n,y_n)$$
+que representan las observaciones de dos variables numéricas. Digamos que $x$ es la edad e $y$ el peso de $n$ estudiantes.
+
+## Objetivo
+Describir la relación entre la **variable independiente**, $x$, y la **variable dependiente**, $y$, a partir de estas observaciones.
+
+Para ello, lo que haremos será buscar una función $y=f(x)$ cuya gráfica se aproxime lo máximo posible a nuestros pares ordenados $(x_i,y_i)_{i=1,...,n}$.
+Esta función dará un modelo matemático de cómo se comportan estas observaciones, lo cual nos permitirá entender mejor los mecanismos que relacionan las variables estudiadas o incluso, nos dará la oportunidad de hacer predicciones sobre futuras observaciones.
+
+La primera opción consiste en estudiar si los puntos $(x_i,y_i)_{i=1,...,n}$ satisfacen una relación lineal de la forma.
+$$y=ax+b$$
+con $a,b \in \mathbb{R}$.
+En este caso, se busca la recta $y=ax+b$ que mejor se aproxime los puntos dados imponiendo que la suma de los cuadrados de las diferencias entre los valores $y_i$ y sus aproximaciones $\tilde{y}_i= ax_i+b$ sea mínima. Es decir, que
+$$\sum_{i=1}^{n}{(y_1-\tilde{y}_i)^2}$$
+sea mínima
+
+## Ejemplo 1
+En este ejemplo, nosotros haremos uso del siguiente dataframe
+```{r}
+body = read.table("../data/bodyfat.txt", header= TRUE)
+head(body,3)
+```
+
+Mas concretamente, trabajaremos con las variables **fat** y **weight**.
+```{r}
+body2= body[,c(2,4)]
+names(body2) = c("Grasa", "Peso")
+str(body2)
+```
+```{r}
+head(body2,3)
+```
+
+## Representación gráfica
+
+Al analizar datos, siempre es recomendable empezar con una representación gráfica que nos permita hacernos a la idea de lo que tenemos.
+
+Esto se consigue haciendo uso de la función **plot**, que ya hemos estudiado en detalle de las lecciones anteriores. No obstante, para lo que necesitamos en este tema nos conformamos con un gráfico básico de estos puntos que nos muestre su distribución.
+
+```{r}
+plot(body2)
+```
+
+
+## Calculando la recta de regresión
+
+Para calcular la **recta de regresión** con R de la familia de puntos $(x_i,y_i)_{i=1,...,n}$ si **x** es el vector $(x_i)_{i=1,...,n}$ e **y** es el vector $(y_i)_{i=1,...,n}$, entonces, su recta de regresión se calcula mediante la instrucción.
+**lm(y~x)**
+Cuidado con la sintaxis: primero va el vector de las variables dependientes y, seguidamente después de una tilde ~, va el vector de las variables independientes.
+
+Esto se debe a que R toma el significado de la tilde como "en función de". Es decir, la interpretación de **lm(y~x)** en R es "la recta de regresión de *y* en función de *x*".
+
+Si los vectores **y** y **x** son, en este orden, la primera y la segunda columna de un data frame de dos variables, entonces es suficiente aplicar la función **lm** al dataframe.
+
+En general, si **x** e **y** son dos variables de un data frame, para calcular la recta de regresión de **y** en función de **x** podemos usar la instrucción.
+
+**lm(y~x, data = data frame)**
+
+```{r}
+lm(body2$Peso~body2$Grasa) #Opción 1
+```
+
+```{r}
+lm(Peso~Grasa, data = body2) #Opción 2
+```
+
+El resultado obtenido de la recta de regresión es:
+$$y=2.151x+137.738$$
+Se puede superponer esta recta en el gráfico anterior haciendo uso de la función **abline()**.
+
+```{r}
+plot(body2)
+abline(lm(Peso~Grasa, data = body2), col = "purple")
+```
+
+## Haciendo predicciones
+Podemos utilizar todo lo hecho hasta ahora para predecir valores $\tilde{y}_i$ en función de los $x_i$ resolviendo una simple ecuación lineal.
+
+## Coeficiente de determinación $R^2$
+Este coeficiente se encuentra en el intervalo $[0,1]$. Si $R^2$ es mayor a 0.9, consideraremos que el ajuste es bueno. De lo contrario, no.
+
+La función **summary** aplicada a **lm** nos muestra los contenidos de este objeto. Entre ellos encontramos **Multiple R-squared**, que no es ni más ni menos que el coeficiente de determinación, $R^2$.
+Se puede aplicar **summary(lm(...))$r.squared**.
+
+```{r}
+summary(lm(Peso~Grasa, data= body2))
+
+```
+
+Los residuos son las diferencias que existen entre el valor real y la recta de regresión.
+
+**Multipled R-squared = 0.3750509**
+
+Calcular el $R^2$ de una forma más rápida.
+
+```{r}
+summary(lm(Peso~Grasa, data= body2))$r.squared
+```
+
+# Rectas de regresión y transformaciones logarítmicas
+
+## Transformaciones logarítmicas
+
+No siempre existen dependencias lineales. A veces nos encontramos otro tipo de dependencias, como por ejemplo potencias o exponenciales.
+Estas se pueden transformar a lineales mediante un **cambio de escala**.
+
+## Escalas logarítmicas
+
+Por lo general, es habitual encontramos gráficos con sus ejes en **escala lineal**. Es decir, las marcas en los ejes están iguales espaciadas.
+A veces, es conveniente dibujar alguno de los ejes en **escala logarítmica**, de modo que la misma distancia entre las marcas significa el mismo cociente entre sus valores. En otras palabras, un eje en escala logarítmica representa el *logaritmo* de sus valores en escala lineal.
+
+* Un gráfico está en **escala semilogarítmica** cuando su eje de abcisas está en escala lineal y, el de ordenadas, en escala logarítmica.
+* Un gráfico está en **escala doble logarítmica** cuando ambos ejes están en escala logarítmica.
+
+### Interpretación gráfica
+
+Si al representar unos puntos $(x_i,y_i)_{i=1,...,n}$ en escala **semilogratímica** observamos que siguen aproximadamente una recta, esto querrá decir que los valores $log(y)$ siguen una ley aproximadamente lineal en los valores $x$, y, por lo tanto, que $y$ sigue una **ley aproximadamente exponencial** en x.
+En efecto, si $log(y)=ax+b$, entonces,
+$$y=10^{log(y)}=10^{ax+b}=10^{ax}\cdot10^{b}=\alpha^{x}\beta$$
+con $\alpha=10^{\alpha}$ y $\beta=10^{b}$.
+
+Si al representar unos puntos $(x_i,y_i)_{i=1,...,n}$ en escala **doble logarítmica** observamos que siguen aproximadamente una recta, esto querrá decir que los valores $log(y)$ siguen una ley aproximadamente lineal en los valores $log(x)$, y, por lo tanto, que $y$ sigue una **ley aproximadamente potencial** en x.
+En efecto, si $\log(y)=a\log(x)+b$, entonces, por propiedades de logaritmos.
+
+$$y=10^{\log(y)}=10^{a\log(x)+b}=(10^{\log(x)})^{a}\cdot10^{b} = x^{\alpha}\beta$$
+con $\beta=10^{b}$
+
+
+### Ejemplo 2
+
+```{r}
+dep = c(1.2,3.6,12,36)
+ind = c(20,35,61,82)
+```
+
+
+```{r}
+plot(ind,dep, main="Escala lineal")
+plot(ind,dep, log = "y", main="Escala semilogarítmica")
+```
+
+```{r}
+lm(log10(dep)~ind)
+```
+
+```{r}
+summary(lm(log10(dep)~ind))$r.squared
+```
+
+Lo que acabamos de obtener es que
+$$\log(dep)=0.023\cdot ind-0.33$$
+es una buena aproximación de nuestros datos.
+Con lo cual
+$$dep=10^{0.023\cdot ind}\cdot 10^{-0.33} = 1.054^{ind}\cdot 0.468$$
+```{r}
+plot(ind, dep, main= "Curva de regresión")
+curve(1.054^x*0.468, add=TRUE, col="purple")
+```
+
+## Ejemplo 3
+
+```{r}
+tiempo = 1:10
+gramos = c(0.097,0.709,2.698,6.928,15.242,29.944,52.902,83.903,
+           120.612,161.711)
+d.f = data.frame(tiempo,gramos)
+```
+
+```{r}
+plot(d.f)
+plot(d.f, log="y")
+plot(d.f, log= "xy")
+```
+
+```{r}
+lm(log10(gramos)~log10(tiempo), data = d.f)
+```
+
+```{r}
+summary(lm(log10(gramos)~log10(tiempo), data = d.f))$r.squared
+```
+
+
+Lo que acabamos de obtener es que
+
+$$\log(gramos)=3.298\cdot \log(tiempo)-1.093$$
+es una buena aproximación de nuestros datos
+
+$$gramos=10^{3.298\cdot \log(tiempo)}\cdot 10^{-1.093}= tiempo^{3.298}\cdot 0.081$$
+
+```{r}
+plot(d.f, main = "Curva de Regresión")
+curve(x^(3.298)*0.081, add=TRUE, col="purple")
+```
+
