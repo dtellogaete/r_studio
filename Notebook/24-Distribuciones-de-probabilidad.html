@@ -388,7 +388,19 @@ summary {
 <p><strong>Probabilidad de un suceso</strong>. Número entre 0 y 1 (ambos incluidos) que mide la expectativa de que se dé este suceso.</p>
 <p><strong>Ejemplo</strong> * La probabilidad de sacar un 6 al lanzar un dado estándar no trucado es <span class="math inline">\(\frac{1}{6}\)</span>. * La probabilidad de sacar un 6 al lanzar un dado de 4 caras es 0. * La probabilidad de sacar un 6 al lanzar un dado de 20 caras es <span class="math inline">\(\frac{1}{20}\)</span> * <strong>Suceso vacío o imposible</strong>. <span class="math inline">\(\emptyset\)</span></p>
 <p><strong>Probabilidad</strong>. Sea <span class="math inline">\(\Omega\)</span> el espacio muestral de un experimento aleatorio. Suponiendo que <span class="math inline">\(\Omega\)</span> es finito, una probabilidad sobre <span class="math inline">\(\Omega\)</span> es una aplicación. <span class="math display">\[p:\mathcal{P} (\Omega)\longrightarrow[0,1]\]</span> que satisface * <span class="math inline">\(0 \leq p(A) \leq 1 \forall A\in \mathcal{P} (\Omega)\)</span> * <span class="math inline">\(p(\Omega)=1\)</span> * Si <span class="math inline">\({A_1,...,A_n}\)</span> son sucesos incompatibles dos a dos <span class="math inline">\((A_i\cap A_j = \emptyset \forall_i \neq j)\)</span> <span class="math display">\[p(A_i \cup ...\cup A_n) = p(A_1)+...+p(A_n)\]</span></p>
-<p><span style="color:red">Texto <em>Notación</em> normal</span></p>
+<p><span style="color:red"><em>Notación:</em></span>: Si <span class="math inline">\(a \in \Omega\)</span>, escribiremos <span class="math inline">\(p(a)\)</span> en vez de <span class="math inline">\(p({a})\)</span></p>
+</div>
+</div>
+<div id="variables-aleatoria" class="section level1">
+<h1>Variables Aleatoria</h1>
+<p><strong>Variable Aleatoria</strong>: Una variable aleatoria (v.a.) Sobre <span class="math inline">\(\Omega\)</span> es una aplicación</p>
+<p><span class="math display">\[X:\Omega \rightarrow \mathbb{R}\]</span></p>
+<p>que asigna a cada suceso elemental <span class="math inline">\(\omega\)</span> un número real <span class="math inline">\(X(\omega)\)</span></p>
+<p>Puede entenderse como una descripción numérica de los resultados de un experimento aleatorio.</p>
+<p><strong>Dominio de una variable aleatoria</strong> <span class="math inline">\(D_x\)</span>, es el conjunto de los valores que puede tomar.</p>
+<div id="sucesos-de-variables-aleatorias" class="section level2">
+<h2>Sucesos de variables aleatorias</h2>
+<p>Una variable aleatoria puede definir sucesos, de los cuales queremos conocer la probabilidad p. <span class="math display">\[p(X=a) = p(\{\omega\in \Omega |X(\omega)=a\}) \]</span> <span class="math display">\[p(X&lt;b) = p(\{\omega\in \Omega |X(\omega)&lt;b\}) \]</span> <span class="math display">\[p(X\leq b) = p(\{\omega\in \Omega |X(\omega)\leq b\}) \]</span> <span class="math display">\[p(a&lt; X) = p(\{\omega\in \Omega |a &lt;X(\omega)\}) \]</span> <span class="math display">\[p(a\leq X) = p(\{\omega\in \Omega |a\leq x(\omega)\})\]</span> <span class="math display">\[p(a\leq X \leq b) = p(\{\omega\in \Omega |a\leq X(\omega)\leq b\}) \]</span> <span class="math display">\[p(a&lt; X &lt; b) = p(\{\omega\in \Omega |a&lt; X(\omega)&lt;b\}) \]</span> <span class="math display">\[p(X\in A) = p(\{\omega\in \Omega |X(\omega)\in A\}) \]</span></p>
 </div>
 </div>
 

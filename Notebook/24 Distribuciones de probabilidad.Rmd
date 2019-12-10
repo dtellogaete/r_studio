@@ -47,7 +47,45 @@ que satisface
 * Si ${A_1,...,A_n}$ son sucesos incompatibles dos a dos $(A_i\cap A_j = \emptyset \forall_i \neq j)$
 $$p(A_i \cup ...\cup A_n) = p(A_1)+...+p(A_n)$$
 
-<span style="color:red">*Notación:*</span>: Si $a \in \Omega$, escribiremos $p(a)$ en vez de $p({a})$
+<span style="color:red">*Notación:*</span> Si $a \in \Omega$, escribiremos $p(a)$ en vez de $p({a})$
+
+# Variables Aleatoria
+
+**Variable Aleatoria**: Una variable aleatoria (v.a.) Sobre $\Omega$ es una aplicación
+
+$$X:\Omega \rightarrow \mathbb{R}$$
+
+que asigna a cada suceso elemental $\omega$ un número real $X(\omega)$
+
+Puede entenderse como una descripción numérica de los resultados de un experimento aleatorio.
+
+**Dominio de una variable aleatoria** $D_x$, es el conjunto de los valores que puede tomar.
+
+## Sucesos de variables aleatorias
+Una variable aleatoria puede definir sucesos, de los cuales queremos conocer la probabilidad p.
+ $$p(X=a) = p(\{\omega\in \Omega |X(\omega)=a\}) $$
+ $$p(X<b) = p(\{\omega\in \Omega |X(\omega)<b\}) $$
+ $$p(X\leq b) = p(\{\omega\in \Omega |X(\omega)\leq b\}) $$
+ $$p(a< X) = p(\{\omega\in \Omega |a <X(\omega)\}) $$
+ $$p(a\leq X) = p(\{\omega\in \Omega |a\leq x(\omega)\})$$
+ $$p(a\leq X \leq b) = p(\{\omega\in \Omega |a\leq X(\omega)\leq b\}) $$
+ $$p(a< X < b) = p(\{\omega\in \Omega |a< X(\omega)<b\}) $$
+ $$p(X\in A) = p(\{\omega\in \Omega |X(\omega)\in A\}) $$
+
+## Función de distribución
+
+**Función de distribución de la v.a.X.**. Es la función
+$$F:\mathbb{R}\rightarrow[0,1]$$
+definida por $F(x)=p(X\leq x)$
+Sea $F$ una función de distribución de una v.a. $X$ y digamos
+$$F(a^-) = \lim_{x-a^{-}}F(x)$$
+$$p(X\leq a) =p(X \leq x)$$
+
+
+
+
+
+
 
 
 
