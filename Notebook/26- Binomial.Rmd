@@ -1,0 +1,55 @@
+---
+title: "Distribución Binomial"
+author: "Daniel"
+date: "11-12-2019"
+output: html_document
+---
+
+# Distribución Binomial
+
+Si $X$ es va que mide el "número de éxitos" y se realizan n ensayos de Bernoulli independientes entre sí, diremos que $X$ se distribuye como una binomial con parámetros $n$ y $p$
+
+$$X \sim B(n,p)$$
+
+donde $p$ es la probabilidad de éxito y $q=1-p$ es la probabilidad de fracaso.
+
+* El **dominio** de $X$ será $D_x=\{0,1,2,...,n\}$
+
+* La **función de la densidad** vendrá dada por
+
+$$f(k)= \left( \begin{array}{c} n \\ k \end{array} \right)p^{k}(1-p)^{n-k}$$
+
+* La **función de distribución** vendrá dada por.
+$$F(x)= \left\{\begin{array}{cols} 0 &\mbox{si} &x<0\\ \sum_{k=0}^{x}f(k) &\mbox{si} &0\leq x <n\\ 1 &\mbox{si}& x \geq n \end{array}\right.$$
+
+* **Esperanza:** $E(X)= np$
+* **Varianza:** $Var(X)= npq$
+
+**Atención**. La distribución de Bernoulli es un caso especial de Binomial. Basta tomar n = 1.
+
+## Función de densidad
+
+Sea $X = B(n = 30, p = 0.6)$,
+TODO: escribir la FDens y la FDist
+
+```{r}
+library(Rlab)
+n = 30
+p = 0.6
+plot(0:30, dbinom(0:n, size = n, prob = p))
+```
+
+```{r}
+plot(0:n, pbinom(0:n, size = n, prob = p))
+```
+
+```{r}
+qbinom(0.5, n, p) # Mediana
+```
+
+```{r}
+hist(rbinom(1000, n, p), breaks = 0:30)
+```
+
+
+

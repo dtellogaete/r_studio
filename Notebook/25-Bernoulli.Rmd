@@ -1,0 +1,72 @@
+---
+title: "null"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+---
+
+
+# Distribución de Bernoulli
+
+Si $X$ es va que mide el número de éxitos y se realiza un único experimento con dos posibles resultados (éxito, toma valor de 1 o fracaso, toma valor 0), diremos que $X$ se dsitribuye como una Bernoulli con parámetro $p$
+
+$$X ~ Be(p)$$
+donde $p$ es la probabilidad de éxito y $q=1-p$ es la probabilidad de fracaso.
+
+* El **dominio** de $X$ sera $X(\Omega)= \{0,1\}$
+
+* La *función de probabilidad* vendrá dada por
+
+$$f(k) =p^{k}(1-p)^{1-k}= \left\{\begin{array}{cols} p &\mbox{si} &k=1\\ 1-p &\mbox{si} &k=0\\ 0 &&\mbox{en cualquier otro caso}& \end{array}\right.$$
+
+La **función de distribución** vendrá dada por
+
+$$F(k) = \left\{\begin{array}{cols} 0 &\mbox{si} &k<0\\ q &\mbox{si} &0\leq k <1\\ 0 &\mbox{si}& k \geq 1 \end{array}\right.$$
+
+* Esperanza $E(X)=p$
+
+* Varianza $Var(X)=pq$
+
+El código de distribución de Bernoulli.
+
+* En **R** las funciones del paquete **Rlab: dbenr(x,prob), pbern(q,prob), qbern(p,prob), rbern(n,prob)** donde **prob** es la probabilida de éxito.
+
+* En **Python** tenemos las funciones del paquete **scipy.stats.bernoulli: pmf(k,p), cdf(k,p), ppf(q,p), rvs(p,size)** donde **p** es la probabilidad de éxito.
+
+## En R
+
+Sea $X=Be(p=0.7)$, la distribución que modela la probabilidad de obtener una cara usando una moneda trucada.
+
+```{r}
+library(Rlab)
+dbern(0,0.7) # Probabilidad de obtener un fracaso.
+```
+
+```{r}
+dbern(1,0.7) #Probabilidad de obtener éxito.
+```
+
+```{r}
+pbern(0, 0.7) #Función acumulada
+```
+
+```{r}
+pbern(1, 0.7) #Funcion acumulada
+```
+
+```{r}
+qbern(0.5, prob = 0.7) #primer cuantil
+```
+
+```{r}
+qbern(0.25, prob=0.7)
+```
+
+```{r}
+rbern(100, prob=0.7) -> data #Numeros aleatorios 
+hist(data)
+```
+
+
+

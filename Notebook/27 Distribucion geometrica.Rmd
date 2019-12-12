@@ -1,0 +1,54 @@
+---
+title: "27 Distribución Geométrica"
+author: "Daniel"
+date: "11-12-2019"
+output: html_document
+---
+
+# Distribución Geométrica
+
+Si $X$ es variable aleatoria que mide el "número de repeticiones independientes del experimento hasta haber conseguido éxito", directo que $X$ se distribuye como una Geométrica con parámetro $p$
+
+$$X \sim Ge(p)$$
+
+donde $p$ es la probabilidad de éxito y $q=1-p$ es la probabilidad de fracaso.
+
+* El **dominio** de $X$ será $D_x = {0,1,2,...}$ o bien $D_x= {1,2,...}$ en función de si empieza en 0 o en 1, respectivamente.
+
+* La **función de densidad** vendrá dada por
+
+$$f(x) = (1-p)^{k}p  \qquad  \mbox{ si empieza en 0} $$ 
+
+$$f(x) = (1-p)^{k-1}p  \qquad  \mbox{ si empieza en 1} $$ 
+
+* La **función de distribución** vendrá dada por
+
+$$F(x) = \left\{\begin{array}{cols} 0 &\mbox{si} & x<0\\1 -(1-p)^{k+1} &\mbox{si} &k \leq <x <k+1, k \in \mathbb{N} \end{array}\right.$$
+
+* **Esperanza** $E(x)= \frac{1-p}{p}$ si empieza en 0 y $E(X)= \frac{1}{p}$ si empieza en 1.
+
+* **Varianza** $Var(X)=\frac{1-p}{p^2}$
+
+* **Propiedad de la falta de memoria**. Si $X$ es una va. $Ge(p)$, entonces, 
+
+$$p\{X \geq m+n: X \geq n \} = p\{X \geq m\} \quad \forall  m,n =0,1,... $$
+
+## Funcion de densidad
+
+Sea $X=Geom(p=0.1)$ la distribucipión que modela la probabilidad de intentar abrir una puerta hasta conseguirlo.
+
+$$f(k)=(1-p)^{k-1}p$$
+## En `R`
+
+```{r}
+library(Rlab)
+p = 0.1
+plot(0:20, dgeom(0:20, p))
+plot(0:20, dgeom(0:20, p), ylim = c(0,1))
+qgeom(0.5, p)
+hist(rgeom(10000, p)) # Generacion de datos aleatorios
+
+```
+
+
+

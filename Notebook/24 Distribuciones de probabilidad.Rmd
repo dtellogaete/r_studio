@@ -81,11 +81,70 @@ Sea $F$ una función de distribución de una v.a. $X$ y digamos
 $$F(a^-) = \lim_{x-a^{-}}F(x)$$
 $$p(X\leq a) =p(X \leq x)$$
 
+## Variable aleatoria discreta
+
+**Variable aleatoria discreta**: Una v.a. $X:\Omega \rightarrow \mathbb{R}$ es discreta cuando $D_x$ es finito o un subconjunto de $\mathbb{N}$
+**Función de densidad**: Es la función $f:\mathbb{R} \rightarrow [0,1]$ definida por:
+$$f(x)=p(X=x)$$
+Nótese que $f(x)=0$ si $x \in D_x$. Por tanto, interpretaremos la función de densidad como la función
+$$f:D_x \rightarrow [0,1]$$
+
+## Esperanza
+
+**Esperzana de una v.a. discreta**: Sea $f:D_x \rightarrow [0,1]$ la densidad de $X$, entonces la esperanza respecto de la densidad es la suma ponderada de los elementos de $D_x$, multiplicando cada elemento $x$ de $D_x$ por su probabilidad,
+$$E(X) = \sum_{x \in D_x}x \cdot f(x)$$
+Si $g:D_x \rightarrow \mathbb{R}$ es una aplicación
+$$E(g(X))=\sum_{x \in D_x}g(x) \cdot f(x)$$
+
+## Varianza
+
+**Varianza de una v.a. discreta**. Sea $f:D_x \rightarrow [0,1]$ la densidad de $X$, entonces ña varianza respecto de la densidad es el valor esperado de la diferencia al cuadrado entre $X$ y su valor medio $E(X)$,
+$$Var(X)=E((X-E(X))^{2})$$
+La varianza mide como de variados son los resultados de $X$ respecto de la media.
+
+## Desviacion típica
+
+**Desviación típica de una v.a. discreta**: Sea $f:D_x \rightarrow[0,1]$ la densidad de $X$, entonces la desviación típica respecto de la densidad es.
+$$\sigma(X) = \sqrt{Var(X)}$$
+Las unidades de la varianza son las de $X$ al cuadrado. En cambio, las de la desviación típica son las mismas unidades de las de $X$.
+
+Si $X$ es una v.a. discreta y $g: D_x \rightarrow \mathbb{R}$ una función,
+$$\sigma(g(X))= \sqrt{Var((g(X))}$$
+
+# El sesgo
+
+Para saber que tan simetrica o asimetrica es una distribucion en torno al valor central.
+Para tener una medida de que tan normal es una distribución es el sesgo, mide que tan simetrica es una distribucion.
+El sesgo será un valor negativo, positivo.
+El sesgo se puede calcular de forma numérica.
+
+El sesgo se define como $\frac{\mu - med}{\sigma}$
+
+**Coeficiente de curtosis**: Que tan alargada es la cola de una distribución.
+
+En cuanto al sesgo de una distribución existe muchas forma de calcularlas.
+* Pearson
+* $\frac{\mu - med}{\sigma}$
+
+# Las distribuciones más conocidas
+
+Funciones para poder trabajar con variables aleatorias. Dada cualquier $va$, R nos da cuatro funciones para poder trabajar con ellas:
+
+* **dva(x,...):** Función de densidad o de probabilidad $f(x)$ de la variable aleatoria para el valor $x$ del dominio de definición.
+
+* **pva(x,...):** Función de una distribución $F(x)$ de la variable aleatoria para el valor $x$ del dominio de definición.
+
+* **qva(p,...):** Cuantil $p-$ ésimo de la variable aleatoria (el valor de $x$ más pequeño tal que $F(x) \geq p$).
+
+* **rva(n,...):** Generador de $n$ observaciones siguiendo la distribución de la variable aleatoria.
 
 
+Dada cualquier $va$ aleatoria en **Python** tenemos las mismas cuatro funciones, sin que su nombre depende de la misma:
 
+* **pmf(k,...)** o **pdf(x,...):** Función de probabilidad $f(x)$ o de densidad $f(x)$ de la variable aleatoria para los valores $k$ o $x$ del dominio.
 
+* **cdf(x,...):** Función de distrubución de $F(x)$ de la variable aleatoria para el valor $k$ del dominio.
 
+* **ppf(p,...):**  Cuantil $p-$ ésimo de la variable aleatoria (el valor de $x$ más pequeño tal que $F(x) \geq p$).
 
-
-
+* **rvs(size,...):** Generador *size* observaciones siguiendo la distribución de la variable aleatoria.
