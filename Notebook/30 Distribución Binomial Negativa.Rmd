@@ -1,0 +1,36 @@
+---
+title: ''
+output: html_document
+---
+
+# Distribución Binomial Negativa
+
+Si $X$ es v.a. que mide el "número de repeticiones hasta observar los *r* éxitos en ensayos de Bernoulli", diremos que $X$ se distribuye como una Binomial Negativa con parámetros $r$ y $p$,
+
+$$X \sim BN(r,p)$$
+
+donde $p$ es la probabilidad de éxito
+
+* El **dominio** de $X$ será $D_x = \{r,r+1,r+2,...\}$
+
+* La **función de densidad** vendrá dada por
+
+$$f(k) = \left(\begin{array}{c} k-1  \\r-1\end{array}\right) p^{r}(1-p)^{k-r}, k \geq r$$
+
+* La **función de distribución** no tiene una expresión analítica
+
+* **Esperanza** $E(x)=\frac{r}{p}$
+
+* **Varianza** $Var(X) = r \frac{1-p}{p}$
+
+El codígo de la distribución Binomial Negativa
+
+* En `R` tenemos las funciones del paquete **Rlab:dnbinom(x,size,prop)**
+
+* En `Python` tenemos las funciones del paquete **scipy,stats.nbinom**
+
+
+
+
+
+

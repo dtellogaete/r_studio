@@ -1,0 +1,31 @@
+---
+title: "Diamantes"
+author: "Daniel"
+date: "13-12-2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=TRUE)
+devtools::install_github("rstudio/reticulate") 
+```
+
+
+# Análisis de los diamantes
+
+
+
+```{python}
+library("reticulate")
+import numpy as np
+import pandas as pd 
+import matplotlib
+
+from ggplot import diamons 
+
+matplotlib.style.use("ggplot")
+
+
+```
+
+
